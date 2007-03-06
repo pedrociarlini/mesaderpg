@@ -3,7 +3,7 @@
 	<property file="build.properties" />
 
 	<target name="deploy" depends="clean">
-		<jar destfile="${jarname}">
+		<jar destfile="${jarname}-${version}.jar">
 			<manifest id="MANIFEST.MF">
 				<attribute name="Main-Class" value="pedrociarlini.rolardados.ClassePrincipal" />
 				<attribute name="Java-Bean" value="false" />
@@ -14,7 +14,7 @@
 			<!-- fileset dir="src" includes="**/*" / -->
 			<!-- fileset dir="lib" includes="**/*" / -->
 		</jar>
-		<echo message="Para executar, colocar o jacksum.jar no mesmo nível do ${jarname}." />
+		<echo message="Para executar, é necessário ter instalado o Java 5." />
 	</target>
 	<target name="clean">
 		<delete file="${jarname}" />
