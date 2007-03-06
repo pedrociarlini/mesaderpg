@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="RolarDados" default="deploy" basedir=".">
+	<property file="build.properties" />
+
+	<target name="deploy" depends="clean">
+		<jar destfile="${jarname}">
+			<manifest id="MANIFEST.MF">
+				<attribute name="Main-Class" value="pedrociarlini.rolardados.ClassePrincipal" />
+				<attribute name="Java-Bean" value="false" />
+				<!-- attribute name="Name" value="so\Deadlock.class" / -->
+				<!-- attribute name="Class-Path" value="jacksum.jar" / -->
+			</manifest>
+			<fileset dir="classes" includes="**/*" />
+			<!-- fileset dir="src" includes="**/*" / -->
+			<!-- fileset dir="lib" includes="**/*" / -->
+		</jar>
+		<echo message="Para executar, colocar o jacksum.jar no mesmo nível do ${jarname}." />
+	</target>
+	<target name="clean">
+		<delete file="${jarname}" />
+		<delete file="${distname}" />
+	</target>
+</project>
+
+
