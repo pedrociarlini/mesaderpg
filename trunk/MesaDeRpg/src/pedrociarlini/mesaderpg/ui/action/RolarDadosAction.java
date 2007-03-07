@@ -1,4 +1,4 @@
-package pedrociarlini.rolardados.ui.action;
+package pedrociarlini.mesaderpg.ui.action;
 
 import java.awt.Color;
 import java.awt.Container;

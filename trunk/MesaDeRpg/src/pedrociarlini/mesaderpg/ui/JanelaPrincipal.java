@@ -1,4 +1,4 @@
-package pedrociarlini.rolardados.ui;
+package pedrociarlini.mesaderpg.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -12,10 +12,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import pedrociarlini.rolardados.model.JogadorVO;
-import pedrociarlini.rolardados.ui.action.RolarDadosAction;
+import pedrociarlini.mesaderpg.model.JogadorVO;
+import pedrociarlini.mesaderpg.ui.action.ConfigurarJogadorAction;
+import pedrociarlini.mesaderpg.ui.action.RolarDadosAction;
+
 import java.awt.FlowLayout;
-import pedrociarlini.rolardados.ui.action.ConfigurarJogadorAction;
 
 public class JanelaPrincipal extends JFrame {
 

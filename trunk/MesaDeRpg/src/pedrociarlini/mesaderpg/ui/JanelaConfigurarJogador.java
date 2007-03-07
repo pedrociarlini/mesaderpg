@@ -1,4 +1,4 @@
-package pedrociarlini.rolardados.ui;
+package pedrociarlini.mesaderpg.ui;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -15,7 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import pedrociarlini.rolardados.model.JogadorVO;
+import pedrociarlini.mesaderpg.model.JogadorVO;
+
 import java.awt.Font;
 
 public class JanelaConfigurarJogador extends JDialog implements ActionListener {
