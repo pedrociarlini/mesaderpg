@@ -1,6 +1,6 @@
-package pedrociarlini.rolardados;
+package pedrociarlini.mesaderpg;
 
-import pedrociarlini.rolardados.ui.JanelaPrincipal;
+import pedrociarlini.mesaderpg.ui.JanelaPrincipal;
 
 
 public class ClassePrincipal {

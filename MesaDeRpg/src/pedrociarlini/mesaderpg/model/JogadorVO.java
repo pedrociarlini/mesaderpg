@@ -1,4 +1,4 @@
-package pedrociarlini.rolardados.model;
+package pedrociarlini.mesaderpg.model;
 
 import java.io.Serializable;
 import java.net.Socket;

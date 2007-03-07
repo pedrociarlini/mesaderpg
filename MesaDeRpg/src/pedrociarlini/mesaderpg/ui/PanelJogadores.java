@@ -1,4 +1,4 @@
-package pedrociarlini.rolardados.ui;
+package pedrociarlini.mesaderpg.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
-import pedrociarlini.rolardados.ui.action.RolarDadosAction;
+import pedrociarlini.mesaderpg.ui.action.RolarDadosAction;
 
 public class PanelJogadores extends JPanel {
 

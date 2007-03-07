@@ -1,4 +1,4 @@
-package pedrociarlini.rolardados.ui.action;
+package pedrociarlini.mesaderpg.ui.action;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -6,8 +6,8 @@ import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 
-import pedrociarlini.rolardados.model.JogadorVO;
-import pedrociarlini.rolardados.ui.JanelaConfigurarJogador;
+import pedrociarlini.mesaderpg.model.JogadorVO;
+import pedrociarlini.mesaderpg.ui.JanelaConfigurarJogador;
 
 public class ConfigurarJogadorAction extends AbstractAction {
 
