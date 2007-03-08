@@ -198,4 +198,4 @@ public class JanelaConfigurarJogador extends JDialog implements ActionListener {
         }
     }
 
-} // @jve:decl-index=0:visual-constraint="10,10"
+}  //  @jve:decl-index=0:visual-constraint="189,156"

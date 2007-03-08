@@ -2,8 +2,7 @@ package pedrociarlini.mesaderpg.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -11,9 +10,6 @@ import javax.swing.JPanel;
 
 import pedrociarlini.mesaderpg.ui.action.RolarDadosAction;
 import pedrociarlini.mesaderpg.util.MessagesUtil;
-import javax.swing.BoxLayout;
-import java.awt.GridLayout;
-import java.awt.FlowLayout;
 
 public class PanelJogadores extends JPanel {
 
