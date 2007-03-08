@@ -15,8 +15,10 @@ import javax.swing.JSplitPane;
 import pedrociarlini.mesaderpg.model.JogadorVO;
 import pedrociarlini.mesaderpg.ui.action.ConfigurarJogadorAction;
 import pedrociarlini.mesaderpg.ui.action.RolarDadosAction;
+import pedrociarlini.mesaderpg.util.MessagesUtil;
 
 import java.awt.FlowLayout;
+import javax.swing.JScrollPane;
 
 public class JanelaPrincipal extends JFrame {
 
@@ -50,6 +52,8 @@ public class JanelaPrincipal extends JFrame {
 
     private JogadorVO jogador; // @ijv
 
+    private JScrollPane scrollPane = null;
+
     /**
      * This is the default constructor
      */
@@ -69,7 +73,8 @@ public class JanelaPrincipal extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setJMenuBar(getMenuBarPrincipal());
         this.setContentPane(getPrincipalPane());
-        this.setTitle("RolarDados");
+        this.setTitle(MessagesUtil.getString("JanelaPrincipal.application.name")
+                + MessagesUtil.getString("JanelaPrincipal.application.version")); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**
@@ -95,7 +100,8 @@ public class JanelaPrincipal extends JFrame {
     private JMenu getMenuConfigurar() {
         if (menuConfigurar == null) {
             menuConfigurar = new JMenu();
-            menuConfigurar.setText("Configurar");
+            menuConfigurar.setText(MessagesUtil
+                    .getString("JanelaPrincipal.menu.configurar")); //$NON-NLS-1$
             menuConfigurar.add(getMenuItemJogador());
             menuConfigurar.add(getMenuItemConexao());
         }
@@ -111,7 +117,8 @@ public class JanelaPrincipal extends JFrame {
         if (menuItemJogador == null) {
             menuItemJogador = new JMenuItem();
             menuItemJogador.setAction(getConfigurarJogadorAction());
-            menuItemJogador.setText("Jogador");
+            menuItemJogador.setText(MessagesUtil
+                    .getString("JanelaPrincipal.menu.item.jogador")); //$NON-NLS-1$
             getConfigurarJogadorAction().putValue(
                     ConfigurarJogadorAction.JOGADOR_VO, this.jogador);
         }
@@ -140,7 +147,8 @@ public class JanelaPrincipal extends JFrame {
     private JMenuItem getMenuItemConexao() {
         if (menuItemConexao == null) {
             menuItemConexao = new JMenuItem();
-            menuItemConexao.setText("Conexão");
+            menuItemConexao.setText(MessagesUtil
+                    .getString("JanelaPrincipal.menu.item.conexao")); //$NON-NLS-1$
         }
         return menuItemConexao;
     }
@@ -153,7 +161,8 @@ public class JanelaPrincipal extends JFrame {
     private JMenu getMenuConectar() {
         if (menuConectar == null) {
             menuConectar = new JMenu();
-            menuConectar.setText("Conectar");
+            menuConectar.setText(MessagesUtil
+                    .getString("JanelaPrincipal.menu.conectar")); //$NON-NLS-1$
         }
         return menuConectar;
     }
@@ -182,8 +191,9 @@ public class JanelaPrincipal extends JFrame {
             splitPane = new JSplitPane();
             splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
             splitPane.setPreferredSize(new Dimension(300, 118));
-            splitPane.setTopComponent(getEditorPaneMensagens());
+            splitPane.setDividerLocation(100);
             splitPane.setBottomComponent(getPanelResultados());
+            splitPane.setTopComponent(getScrollPane());
             splitPane.setOneTouchExpandable(true);
         }
         return splitPane;
@@ -197,10 +207,10 @@ public class JanelaPrincipal extends JFrame {
     private JEditorPane getEditorPaneMensagens() {
         if (editorPaneMensagens == null) {
             editorPaneMensagens = new JEditorPane();
-            editorPaneMensagens.setPreferredSize(new Dimension(448, 80));
-            editorPaneMensagens.setEnabled(false);
+            editorPaneMensagens.setPreferredSize(new Dimension(50, 50));
+            editorPaneMensagens.setEnabled(true);
             editorPaneMensagens
-                    .setText("Em breve aqui poderemos trocar mensagens.");
+                    .setText("Em breve aqui poderemos trocar mensagens."); //$NON-NLS-1$
         }
         return editorPaneMensagens;
     }
@@ -213,6 +223,9 @@ public class JanelaPrincipal extends JFrame {
     private JSplitPane getSplitPanePrincipal() {
         if (splitPanePrincipal == null) {
             splitPanePrincipal = new JSplitPane();
+            splitPanePrincipal.setContinuousLayout(true);
+            splitPanePrincipal.setDividerLocation(150);
+            splitPanePrincipal.setOneTouchExpandable(true);
             splitPanePrincipal.setRightComponent(getSplitPane());
             splitPanePrincipal.setLeftComponent(getPanelJogadores());
         }
@@ -260,5 +273,18 @@ public class JanelaPrincipal extends JFrame {
             configurarJogadorAction = new ConfigurarJogadorAction();
         }
         return configurarJogadorAction;
+    }
+
+    /**
+     * This method initializes scrollPane	
+     * 	
+     * @return javax.swing.JScrollPane	
+     */
+    private JScrollPane getScrollPane() {
+        if (scrollPane == null) {
+            scrollPane = new JScrollPane();
+            scrollPane.setViewportView(getEditorPaneMensagens());
+        }
+        return scrollPane;
     }
 } // @jve:decl-index=0:visual-constraint="26,5"
