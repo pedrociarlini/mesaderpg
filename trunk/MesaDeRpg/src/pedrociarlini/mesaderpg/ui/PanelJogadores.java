@@ -10,6 +10,10 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 
 import pedrociarlini.mesaderpg.ui.action.RolarDadosAction;
+import pedrociarlini.mesaderpg.util.MessagesUtil;
+import javax.swing.BoxLayout;
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
 
 public class PanelJogadores extends JPanel {
 
@@ -23,7 +27,7 @@ public class PanelJogadores extends JPanel {
 
     private JList listJogadores = null;
 
-    private RolarDadosAction rolarDadosAction = null;  //  @jve:decl-index=0:visual-constraint="236,15"
+    private RolarDadosAction rolarDadosAction = null; // @jve:decl-index=0:visual-constraint="236,15"
 
     /**
      * This is the default constructor
@@ -55,16 +59,12 @@ public class PanelJogadores extends JPanel {
      */
     private JPanel getPanelBotoes() {
         if (panelBotoes == null) {
-            GridBagConstraints gridBagConstraints1 = new GridBagConstraints();
-            gridBagConstraints1.gridx = 0;
-            gridBagConstraints1.fill = GridBagConstraints.HORIZONTAL;
-            gridBagConstraints1.gridy = 1;
-            GridBagConstraints gridBagConstraints = new GridBagConstraints();
-            gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+            GridLayout gridLayout1 = new GridLayout();
+            gridLayout1.setRows(2);
             panelBotoes = new JPanel();
-            panelBotoes.setLayout(new GridBagLayout());
-            panelBotoes.add(getButtonEnviarMensagem(), gridBagConstraints);
-            panelBotoes.add(getButtonRolarDados(), gridBagConstraints1);
+            panelBotoes.setLayout(gridLayout1);
+            panelBotoes.add(getButtonEnviarMensagem(), null);
+            panelBotoes.add(getButtonRolarDados(), null);
         }
         return panelBotoes;
     }
@@ -77,8 +77,9 @@ public class PanelJogadores extends JPanel {
     private JButton getButtonEnviarMensagem() {
         if (buttonEnviarMensagem == null) {
             buttonEnviarMensagem = new JButton();
-            buttonEnviarMensagem.setText("Enviar mensagem");
-            buttonEnviarMensagem.setFont(new Font("Dialog", Font.BOLD, 10));
+            buttonEnviarMensagem.setText(MessagesUtil
+                    .getString("PanelJogadores.button.enviarMensagem")); //$NON-NLS-1$
+            buttonEnviarMensagem.setFont(new Font("Dialog", Font.BOLD, 10)); //$NON-NLS-1$
         }
         return buttonEnviarMensagem;
     }
@@ -92,8 +93,9 @@ public class PanelJogadores extends JPanel {
         if (buttonRolarDados == null) {
             buttonRolarDados = new JButton();
             buttonRolarDados.setAction(getRolarDadosAction());
-            buttonRolarDados.setFont(new Font("Dialog", Font.BOLD, 10));
-            buttonRolarDados.setText("Rolar dados");
+            buttonRolarDados.setFont(new Font("Dialog", Font.BOLD, 10)); //$NON-NLS-1$
+            buttonRolarDados.setText(MessagesUtil
+                    .getString("PanelJogadores.button.rolarDados")); //$NON-NLS-1$
         }
         return buttonRolarDados;
     }
