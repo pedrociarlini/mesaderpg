@@ -88,7 +88,6 @@ public class ConexaoImpl implements Conexao {
         return porta;
     }
 
-    
     protected ObjectInputStream getOis() {
         return ois;
     }

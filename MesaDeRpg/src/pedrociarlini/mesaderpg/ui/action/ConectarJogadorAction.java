@@ -38,7 +38,9 @@ public class ConectarJogadorAction extends AbstractAction {
         ConexaoJogador conn = null;
         try {
             conn = JanelaConectarJogador.showJogadorDialog();
+            int porta = conn.receivePorta();
             remoteJogador = conn.open(jogador);
+            // TODO Separar conexão da inserção do jogador na lista.
             remoteJogador.setConn(conn);
             listaJogadores.add(new JogadorComponent(remoteJogador));
         } catch (IOException e1) {
