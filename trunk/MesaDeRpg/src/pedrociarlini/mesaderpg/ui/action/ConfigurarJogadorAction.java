@@ -26,18 +26,15 @@ public class ConfigurarJogadorAction extends AbstractAction {
 
     public void actionPerformed(ActionEvent e) {
         JogadorVO jogador = (JogadorVO) getValue(JOGADOR_VO);
-        JogadorVO novoJogador = JanelaConfigurarJogador.showJogadorDialog();
+        JogadorVO novoJogador = JanelaConfigurarJogador.showJogadorDialog(jogador);
         if (novoJogador != null) {
             fillJogadorVO(novoJogador, jogador);
         }
-        System.out.println(jogador);
+        //System.out.println(jogador);
     }
 
     private void fillJogadorVO(JogadorVO source, JogadorVO dest) {
-        if (dest == null) {
-            dest = new JogadorVO(source.getNome(), source.isMestre());
-        }
-        else {
+        if (dest != null && source != null) {
             dest.setNome(source.getNome());
             dest.setMestre(source.isMestre());
         }

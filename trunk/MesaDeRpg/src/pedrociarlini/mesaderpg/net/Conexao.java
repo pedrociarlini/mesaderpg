@@ -15,7 +15,9 @@ public interface Conexao {
 	
 	public void addDataReceivedListener(DataReceivedListener listener);
 	
-	public void open() throws IOException;
+	public void open(String ip, int porta) throws IOException;
+
+    public void open() throws IOException;
 
 	public void close() throws IOException;
 
