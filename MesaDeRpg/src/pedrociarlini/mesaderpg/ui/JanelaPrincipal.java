@@ -19,6 +19,7 @@ import pedrociarlini.mesaderpg.util.MessagesUtil;
 
 import java.awt.FlowLayout;
 import javax.swing.JScrollPane;
+import pedrociarlini.mesaderpg.ui.action.ConectarJogadorAction;
 
 public class JanelaPrincipal extends JFrame {
 
@@ -48,11 +49,15 @@ public class JanelaPrincipal extends JFrame {
 
     private PanelJogadores panelJogadores = null;
 
-    private ConfigurarJogadorAction configurarJogadorAction = null; // @jve:decl-index=0:visual-constraint="624,2"
+    private ConfigurarJogadorAction configurarJogadorAction = null;  //  @jve:decl-index=0:visual-constraint="716,10"
 
-    private JogadorVO jogador; // @ijv
+    private JogadorVO jogador = new JogadorVO(); // @ijv
 
     private JScrollPane scrollPane = null;
+
+    private JMenuItem menuItemConectarJogador = null;
+
+    private ConectarJogadorAction conectarJogadorAction = null;  //  @jve:decl-index=0:visual-constraint="724,59"
 
     /**
      * This is the default constructor
@@ -69,7 +74,7 @@ public class JanelaPrincipal extends JFrame {
      * @return void
      */
     private void initialize() {
-        this.setSize(578, 441);
+        this.setSize(626, 441);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setJMenuBar(getMenuBarPrincipal());
         this.setContentPane(getPrincipalPane());
@@ -163,6 +168,7 @@ public class JanelaPrincipal extends JFrame {
             menuConectar = new JMenu();
             menuConectar.setText(MessagesUtil
                     .getString("JanelaPrincipal.menu.conectar")); //$NON-NLS-1$
+            menuConectar.add(getMenuItemConectarJogador());
         }
         return menuConectar;
     }
@@ -286,5 +292,31 @@ public class JanelaPrincipal extends JFrame {
             scrollPane.setViewportView(getEditorPaneMensagens());
         }
         return scrollPane;
+    }
+
+    /**
+     * This method initializes menuItemConectarJogador	
+     * 	
+     * @return javax.swing.JMenuItem	
+     */
+    private JMenuItem getMenuItemConectarJogador() {
+        if (menuItemConectarJogador == null) {
+            menuItemConectarJogador = new JMenuItem();
+            menuItemConectarJogador.setAction(getConectarJogadorAction());
+            menuItemConectarJogador.setText("Jogador");
+        }
+        return menuItemConectarJogador;
+    }
+
+    /**
+     * This method initializes conectarJogadorAction	
+     * 	
+     * @return pedrociarlini.mesaderpg.ui.action.ConectarJogadorAction	
+     */
+    private ConectarJogadorAction getConectarJogadorAction() {
+        if (conectarJogadorAction == null) {
+            conectarJogadorAction = new ConectarJogadorAction();
+        }
+        return conectarJogadorAction;
     }
 } // @jve:decl-index=0:visual-constraint="26,5"

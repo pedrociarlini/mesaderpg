@@ -1,7 +1,8 @@
 package pedrociarlini.mesaderpg.model;
 
 import java.io.Serializable;
-import java.net.Socket;
+
+import pedrociarlini.mesaderpg.net.ConexaoJogador;
 
 public class JogadorVO implements Serializable {
 
@@ -14,11 +15,14 @@ public class JogadorVO implements Serializable {
 
     private String nome;
 
-    private Socket conn;
+    private ConexaoJogador conn;
 
-    public JogadorVO(String text, boolean isMestre) {
+    public JogadorVO(String nome, boolean isMestre) {
         setNome(nome);
         setMestre(isMestre);
+    }
+
+    public JogadorVO() {
     }
 
     public boolean isMestre() {
@@ -37,11 +41,11 @@ public class JogadorVO implements Serializable {
         this.nome = nome;
     }
 
-    public Socket getConn() {
+    public ConexaoJogador getConn() {
         return conn;
     }
 
-    public void setConn(Socket conn) {
+    public void setConn(ConexaoJogador conn) {
         this.conn = conn;
     }
 
@@ -54,7 +58,7 @@ public class JogadorVO implements Serializable {
      */
     public String toString()
     {
-        final String TAB = "    ";
+        final String TAB = "\n\t";
         
         String retValue = "";
         

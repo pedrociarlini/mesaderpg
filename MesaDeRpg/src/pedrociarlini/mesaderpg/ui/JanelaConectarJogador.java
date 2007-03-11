@@ -16,18 +16,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import pedrociarlini.mesaderpg.model.JogadorVO;
+import pedrociarlini.mesaderpg.net.ConexaoJogador;
 
 import java.awt.Font;
 
-public class JanelaConfigurarJogador extends JDialog implements ActionListener {
+public class JanelaConectarJogador extends JDialog implements ActionListener {
 
     private static final long serialVersionUID = 1L;
 
     private JPanel jContentPane = null;
 
-    private JTextField textFieldNome = null;
+    private JTextField textFieldIp = null;
 
-    private JLabel labelNome = null;
+    private JLabel labelIP = null;
 
     private JButton buttonOk = null;
 
@@ -35,16 +36,16 @@ public class JanelaConfigurarJogador extends JDialog implements ActionListener {
 
     private JButton buttonCancelar = null;
 
-    private JCheckBox checkBoxMestre = null;
+    private ConexaoJogador conexaoJogador;
 
-    private JogadorVO jogadorVO;
+    private JLabel labelPorta = null;
 
-    private JLabel labelFicha = null;
+    private JTextField textFieldPorta = null;
 
     /**
      * This is the default constructor
      */
-    public JanelaConfigurarJogador() {
+    public JanelaConectarJogador() {
         super();
         initialize();
     }
@@ -55,9 +56,9 @@ public class JanelaConfigurarJogador extends JDialog implements ActionListener {
      * @return void
      */
     private void initialize() {
-        this.setSize(459, 200);
+        this.setSize(344, 200);
         this.setContentPane(getJContentPane());
-        this.setTitle("Configurar Jogador");
+        this.setTitle("Conectar jogador");
     }
 
     /**
@@ -67,19 +68,19 @@ public class JanelaConfigurarJogador extends JDialog implements ActionListener {
      */
     private JPanel getJContentPane() {
         if (jContentPane == null) {
-            GridBagConstraints gridBagConstraints4 = new GridBagConstraints();
-            gridBagConstraints4.gridx = 0;
-            gridBagConstraints4.gridwidth = 2;
-            gridBagConstraints4.gridy = 2;
-            labelFicha = new JLabel();
-            labelFicha
-                    .setText("Vale a pena configurar esalvar a ficha também? "
-                            + "pedrociarlini@gmail.com");
-            labelFicha.setFont(new Font("Dialog", Font.PLAIN, 10));
-            GridBagConstraints gridBagConstraints3 = new GridBagConstraints();
-            gridBagConstraints3.gridx = 0;
-            gridBagConstraints3.gridwidth = 2;
-            gridBagConstraints3.gridy = 1;
+            GridBagConstraints gridBagConstraints21 = new GridBagConstraints();
+            gridBagConstraints21.fill = GridBagConstraints.HORIZONTAL;
+            gridBagConstraints21.gridy = 1;
+            gridBagConstraints21.weightx = 1.0;
+            gridBagConstraints21.insets = new Insets(5, 5, 5, 5);
+            gridBagConstraints21.gridx = 1;
+            GridBagConstraints gridBagConstraints12 = new GridBagConstraints();
+            gridBagConstraints12.gridx = 0;
+            gridBagConstraints12.insets = new Insets(5, 5, 5, 5);
+            gridBagConstraints12.anchor = GridBagConstraints.EAST;
+            gridBagConstraints12.gridy = 1;
+            labelPorta = new JLabel();
+            labelPorta.setText("Porta:");
             GridBagConstraints gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = -1;
             gridBagConstraints.gridy = -1;
@@ -91,9 +92,10 @@ public class JanelaConfigurarJogador extends JDialog implements ActionListener {
             GridBagConstraints gridBagConstraints11 = new GridBagConstraints();
             gridBagConstraints11.gridx = 0;
             gridBagConstraints11.insets = new Insets(5, 5, 5, 5);
+            gridBagConstraints11.anchor = GridBagConstraints.EAST;
             gridBagConstraints11.gridy = 0;
-            labelNome = new JLabel();
-            labelNome.setText("Nome:");
+            labelIP = new JLabel();
+            labelIP.setText("IP:");
             GridBagConstraints gridBagConstraints1 = new GridBagConstraints();
             gridBagConstraints1.gridx = 1;
             gridBagConstraints1.fill = GridBagConstraints.HORIZONTAL;
@@ -102,26 +104,26 @@ public class JanelaConfigurarJogador extends JDialog implements ActionListener {
             gridBagConstraints1.gridy = 0;
             jContentPane = new JPanel();
             jContentPane.setLayout(new GridBagLayout());
-            jContentPane.add(getTextFieldNome(), gridBagConstraints1);
-            jContentPane.add(labelNome, gridBagConstraints11);
+            jContentPane.add(getTextFieldIp(), gridBagConstraints1);
+            jContentPane.add(labelIP, gridBagConstraints11);
             jContentPane.add(getPanelBotoes(), gridBagConstraints2);
-            jContentPane.add(getCheckBoxMestre(), gridBagConstraints3);
-            jContentPane.add(labelFicha, gridBagConstraints4);
+            jContentPane.add(labelPorta, gridBagConstraints12);
+            jContentPane.add(getTextFieldPorta(), gridBagConstraints21);
         }
         return jContentPane;
     }
 
     /**
-     * This method initializes textFieldNome
+     * This method initializes textFieldIp
      * 
      * @return javax.swing.JTextField
      */
-    private JTextField getTextFieldNome() {
-        if (textFieldNome == null) {
-            textFieldNome = new JTextField();
-            textFieldNome.setPreferredSize(new Dimension(150, 20));
+    private JTextField getTextFieldIp() {
+        if (textFieldIp == null) {
+            textFieldIp = new JTextField();
+            textFieldIp.setPreferredSize(new Dimension(150, 20));
         }
-        return textFieldNome;
+        return textFieldIp;
     }
 
     /**
@@ -167,44 +169,16 @@ public class JanelaConfigurarJogador extends JDialog implements ActionListener {
         return buttonCancelar;
     }
 
-    /**
-     * This method initializes checkBoxMestre
-     * 
-     * @return javax.swing.JCheckBox
-     */
-    private JCheckBox getCheckBoxMestre() {
-        if (checkBoxMestre == null) {
-            checkBoxMestre = new JCheckBox();
-            checkBoxMestre.setText("Mestre");
-        }
-        return checkBoxMestre;
-    }
-
-    public static JogadorVO showJogadorDialog() {
-        JanelaConfigurarJogador janela = new JanelaConfigurarJogador(); // @ivj
+    public static ConexaoJogador showJogadorDialog() {
+        JanelaConectarJogador janela = new JanelaConectarJogador(); // @ivj
         janela.setModal(true);
         janela.setVisible(true);
-        return janela.jogadorVO;
-    } // @ijv
-    
-    
-    private void fillValues(JogadorVO atual) {
-        getTextFieldNome().setText(atual.getNome());
-        getCheckBoxMestre().setSelected(atual.isMestre());
-    }
-    
-    public static JogadorVO showJogadorDialog(JogadorVO atual) {
-        JanelaConfigurarJogador janela = new JanelaConfigurarJogador(); // @ivj
-        janela.fillValues(atual);
-        janela.setModal(true);
-        janela.setVisible(true);
-        return janela.jogadorVO;
+        return janela.conexaoJogador;
     } // @ijv
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == getButtonOk()) {
-            this.jogadorVO = new JogadorVO(getTextFieldNome().getText(),
-                    getCheckBoxMestre().isSelected());
+            this.conexaoJogador = new ConexaoJogador();
             dispose();
         }
         else if (e.getSource() == getButtonCancelar()) {
@@ -212,4 +186,17 @@ public class JanelaConfigurarJogador extends JDialog implements ActionListener {
         }
     }
 
-}  //  @jve:decl-index=0:visual-constraint="189,156"
+    /**
+     * This method initializes textFieldPorta	
+     * 	
+     * @return javax.swing.JTextField	
+     */
+    private JTextField getTextFieldPorta() {
+        if (textFieldPorta == null) {
+            textFieldPorta = new JTextField();
+            textFieldPorta.setPreferredSize(new Dimension(150, 20));
+        }
+        return textFieldPorta;
+    }
+
+}  //  @jve:decl-index=0:visual-constraint="188,49"
