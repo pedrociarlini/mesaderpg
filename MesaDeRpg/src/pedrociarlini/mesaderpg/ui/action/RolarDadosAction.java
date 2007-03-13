@@ -37,7 +37,7 @@ public class RolarDadosAction extends AbstractAction {
         Container panelSaida = (Container)getValue(PANEL_SAIDA);
         Random r = new Random();
         JLabel label;
-        for (int i = 0; i <= quantidadeDados; i++) {
+        for (int i = 0; i < quantidadeDados; i++) {
             label = new JLabel("" + (r.nextInt(10) + 1));
             label.setForeground(Color.RED);
             label.setFont(new Font("Verdana", Font.BOLD, 24));
