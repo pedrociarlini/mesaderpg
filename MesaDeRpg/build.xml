@@ -5,7 +5,7 @@
 	<target name="deploy" depends="clean">
 		<jar destfile="${jarname}-${version}.jar">
 			<manifest id="MANIFEST.MF">
-				<attribute name="Main-Class" value="pedrociarlini.rolardados.ClassePrincipal" />
+				<attribute name="Main-Class" value="pedrociarlini.mesaderpg.ClassePrincipal" />
 				<attribute name="Java-Bean" value="false" />
 				<!-- attribute name="Name" value="so\Deadlock.class" / -->
 				<!-- attribute name="Class-Path" value="jacksum.jar" / -->
@@ -17,7 +17,7 @@
 		<echo message="Para executar, é necessário ter instalado o Java 5." />
 	</target>
 	<target name="clean">
-		<delete file="${jarname}" />
+		<delete file="${jarname}-${version}.jar" />
 		<delete file="${distname}" />
 	</target>
 </project>
