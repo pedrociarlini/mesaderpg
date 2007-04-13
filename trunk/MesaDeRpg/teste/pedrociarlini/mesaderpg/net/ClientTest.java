@@ -11,12 +11,13 @@ import java.net.Socket;
 public class ClientTest {
 
 	public static void main(String[] args) {
-		ConexaoMainServer server = new ConexaoMainServer();
-		Thread t = new Thread(server);
-		t.setName("Server");
-		t.start();
+		ConexaoMainServer server = null;
 		
 		try {
+			server = new ConexaoMainServer(27000);
+			Thread t = new Thread(server);
+			t.setName("Server");
+			t.start();
 			Socket s;
 			for (int i = 1; i <= 3; i++) {
 				s = new Socket("localhost", 26270);
