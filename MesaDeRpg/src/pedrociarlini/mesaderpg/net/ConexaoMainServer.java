@@ -1,13 +1,11 @@
 package pedrociarlini.mesaderpg.net;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-import pedrociarlini.mesaderpg.model.JogadorVO;
 import pedrociarlini.mesaderpg.net.event.DataEvent;
 import pedrociarlini.mesaderpg.net.event.DataReceivedListener;
 
@@ -16,20 +14,15 @@ public class ConexaoMainServer implements Runnable {
     ServerSocket listener;
     
     List<Conexao> clientes = new ArrayList<Conexao>();
-
+    
 	private boolean closed = true;
 
-    public ConexaoMainServer() {
-        this(ConexaoMainServer.class.getName());
-    }
-
-    public ConexaoMainServer(String name) {
-        //super(name);
+    public ConexaoMainServer(int port) throws IOException {
+    	listener = new ServerSocket(port);
     }
 
     public void run() {
         try {
-			listener = new ServerSocket(26270, 0);
 	    	closed = false;
             Socket client;
             while (!closed) {
