@@ -1,31 +1,15 @@
 package pedrociarlini.mesaderpg.media;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.media.CannotRealizeException;
-import javax.media.Control;
-import javax.media.GainControl;
-import javax.media.Manager;
-import javax.media.NoPlayerException;
-import javax.media.Player;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSlider;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 public class AnimationPlayer {
 	public static void main(String[] args) {
-		try {
+		/*
+        try {
 			String file;
 			file = "file://"
 					+ "C:\\Pedro\\downloads\\mrkite.mp3"
 							.replaceAll("\\\\", "/");
+        */
 			/*file = "file://"
 				+ "C:\\Pedro\\Pessoal\\Music\\EtCircensis\\V005.WAV"
 						.replaceAll("\\\\", "/");
@@ -36,6 +20,7 @@ public class AnimationPlayer {
 						.replaceAll("\\\\", "/");
 			*/
 			// Manager.setHint(Manager.LIGHTWEIGHT_RENDERER, true);
+            /*
 			Player p = Manager.createRealizedPlayer(new URL(file));
 			for (Control control : p.getControls()) {
 				System.out.println(control);
@@ -79,5 +64,6 @@ public class AnimationPlayer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        */
 	}
 }
