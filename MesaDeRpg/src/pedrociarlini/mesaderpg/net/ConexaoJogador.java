@@ -1,11 +1,8 @@
 package pedrociarlini.mesaderpg.net;
 
 import java.io.IOException;
-import java.net.Socket;
 
 import pedrociarlini.mesaderpg.model.JogadorVO;
-import pedrociarlini.mesaderpg.net.event.DataEvent;
-import pedrociarlini.mesaderpg.net.event.DataReceivedListener;
 
 
 public class ConexaoJogador extends ConexaoImpl {
