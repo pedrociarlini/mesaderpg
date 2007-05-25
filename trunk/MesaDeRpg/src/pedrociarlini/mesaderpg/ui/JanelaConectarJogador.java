@@ -9,16 +9,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import pedrociarlini.mesaderpg.model.JogadorVO;
 import pedrociarlini.mesaderpg.net.ConexaoJogador;
-
-import java.awt.Font;
 
 public class JanelaConectarJogador extends JDialog implements ActionListener {
 
@@ -199,4 +195,4 @@ public class JanelaConectarJogador extends JDialog implements ActionListener {
         return textFieldPorta;
     }
 
-}  //  @jve:decl-index=0:visual-constraint="188,49"
+}  //  @jve:decl-index=0:visual-constraint="14,10"
