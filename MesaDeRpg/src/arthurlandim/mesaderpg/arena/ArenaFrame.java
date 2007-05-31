@@ -35,7 +35,7 @@ public class ArenaFrame extends JFrame {
 				System.exit(0);
 			}
 		});
-		setSize(800, 600);
+		setSize(640, 480);
 		setVisible(true);
 	}
 
