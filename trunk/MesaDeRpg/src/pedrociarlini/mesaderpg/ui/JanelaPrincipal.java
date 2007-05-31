@@ -15,6 +15,7 @@ import javax.swing.JSplitPane;
 import pedrociarlini.mesaderpg.model.JogadorVO;
 import pedrociarlini.mesaderpg.ui.action.ConfigurarJogadorAction;
 import pedrociarlini.mesaderpg.ui.action.RolarDadosAction;
+import pedrociarlini.mesaderpg.ui.action.VisualizarArenaAction;
 import pedrociarlini.mesaderpg.util.MessagesUtil;
 
 import java.awt.FlowLayout;
@@ -26,6 +27,10 @@ public class JanelaPrincipal extends JFrame {
     private static final long serialVersionUID = 1L;
 
     private JPanel principalPane = null;
+
+    private JMenu menuVisualizar = null;
+
+    private JMenuItem menuItemArena = null;
 
     private JMenu menuConfigurar = null;
 
@@ -50,6 +55,8 @@ public class JanelaPrincipal extends JFrame {
     private PanelJogadores panelJogadores = null;
 
     private ConfigurarJogadorAction configurarJogadorAction = null;  //  @jve:decl-index=0:visual-constraint="716,10"
+
+    private VisualizarArenaAction visualizarArenaAction = null;  //  @jve:decl-index=0:visual-constraint="716,10"
 
     private JogadorVO jogador = new JogadorVO(); // @ijv
 
@@ -114,6 +121,36 @@ public class JanelaPrincipal extends JFrame {
     }
 
     /**
+     * This method initializes menuConfigurar
+     * 
+     * @return javax.swing.JMenu
+     */
+    private JMenu getMenuVisualizar() {
+        if (menuVisualizar == null) {
+        	menuVisualizar = new JMenu();
+        	menuVisualizar.setText(MessagesUtil
+                    .getString("JanelaPrincipal.menu.visualizar")); //$NON-NLS-1$
+        	menuVisualizar.add(getMenuItemArena());
+        }
+        return menuVisualizar;
+    }
+
+    /**
+     * This method initializes menuItemJogador
+     * 
+     * @return javax.swing.JMenuItem
+     */
+    private JMenuItem getMenuItemArena() {
+        if (menuItemArena == null) {
+        	menuItemArena = new JMenuItem();
+        	menuItemArena.setAction(getVisualizarArenaAction());
+        	menuItemArena.setText(MessagesUtil
+                    .getString("JanelaPrincipal.menu.item.arena")); //$NON-NLS-1$
+        }
+        return menuItemArena;
+    }
+
+    /**
      * This method initializes menuItemJogador
      * 
      * @return javax.swing.JMenuItem
@@ -140,6 +177,7 @@ public class JanelaPrincipal extends JFrame {
             menuBarPrincipal = new JMenuBar();
             menuBarPrincipal.add(getMenuConfigurar());
             menuBarPrincipal.add(getMenuConectar());
+            menuBarPrincipal.add(getMenuVisualizar());
         }
         return menuBarPrincipal;
     }
@@ -279,6 +317,18 @@ public class JanelaPrincipal extends JFrame {
             configurarJogadorAction = new ConfigurarJogadorAction();
         }
         return configurarJogadorAction;
+    }
+
+    /**
+     * This method initializes configurarJogadorAction
+     * 
+     * @return pedrociarlini.rolardados.ui.action.ConfigurarJogadorAction
+     */
+    private VisualizarArenaAction getVisualizarArenaAction() {
+        if (visualizarArenaAction == null) {
+        	visualizarArenaAction = new VisualizarArenaAction();
+        }
+        return visualizarArenaAction;
     }
 
     /**
