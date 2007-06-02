@@ -1,5 +1,7 @@
 package pedrociarlini.mesaderpg.net.trabalho;
 
+import java.io.Serializable;
+
 import trabalho.IMessage;
 
 /**
@@ -7,7 +9,7 @@ import trabalho.IMessage;
  * @author Pedro Ciarlini
  *
  */
-public class Message implements IMessage {
+public class Message implements IMessage, Serializable {
     
     /**
      * Bytes da mensagem.
