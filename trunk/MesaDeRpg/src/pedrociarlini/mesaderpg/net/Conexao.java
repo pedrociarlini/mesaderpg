@@ -1,6 +1,7 @@
 package pedrociarlini.mesaderpg.net;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import pedrociarlini.mesaderpg.net.event.DataReceivedListener;
 
@@ -10,15 +11,17 @@ public interface Conexao {
 	 * @param obj
 	 * @throws IOException
 	 */
-	public void send(Object obj) throws IOException;
+	public void send(Serializable obj) throws IOException;
 	
 	
 	public void addDataReceivedListener(DataReceivedListener listener);
 	
 	public void open(String ip, int porta) throws IOException;
 
-    public void open() throws IOException;
+    public void open() throws IOException, IllegalStateException;
 
 	public void close() throws IOException;
+	
+	public boolean isClosed();
 
 }

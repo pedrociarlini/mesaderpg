@@ -6,9 +6,6 @@ import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 
-import pedrociarlini.mesaderpg.model.JogadorVO;
-import pedrociarlini.mesaderpg.ui.JanelaConfigurarJogador;
-
 public class VisualizarArenaAction extends AbstractAction {
 
     public VisualizarArenaAction() {

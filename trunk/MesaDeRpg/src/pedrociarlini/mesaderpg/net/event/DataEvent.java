@@ -1,10 +1,11 @@
 package pedrociarlini.mesaderpg.net.event;
 
+import java.io.Serializable;
 import java.util.EventObject;
 
 public class DataEvent extends EventObject {
     
-    private Object receivedData;
+    private Serializable receivedData;
 
 	/**
 	 * 
@@ -15,17 +16,16 @@ public class DataEvent extends EventObject {
 		super(source);
 	}
 
-    public DataEvent(Object source, Object data) {
+    public DataEvent(Object source, Serializable data) {
         this(source);
         setReceivedData(data);
     }
 
-    public Object getReceivedData() {
+    public Serializable getReceivedData() {
         return receivedData;
     }
 
-    
-    public void setReceivedData(Object receivedData) {
+    public void setReceivedData(Serializable receivedData) {
         this.receivedData = receivedData;
     }
 }

@@ -3,6 +3,7 @@ package pedrociarlini.mesaderpg.net;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +29,8 @@ public class ConexaoImpl implements Conexao {
 
 	private int porta;
 
+	private boolean closed = false;
+
 	public ConexaoImpl() {
 	}
 
@@ -52,6 +55,7 @@ public class ConexaoImpl implements Conexao {
 	}
 
 	public void close() throws IOException {
+		closed  = true;
 		this.socket.close();
 	}
 
@@ -79,10 +83,10 @@ public class ConexaoImpl implements Conexao {
 						.getInputStream());
 				oos = new ObjectOutputStream(ConexaoImpl.this.socket
 						.getOutputStream());
-				Object data;
+				Serializable data;
 				while (true) {
 					try {
-						data = ois.readObject();
+						data = (Serializable) ois.readObject();
 						for (DataReceivedListener listener : ConexaoImpl.this.listeners) {
 							listener.onDataReceived(new DataEvent(
 									ConexaoImpl.this, data));
@@ -101,7 +105,7 @@ public class ConexaoImpl implements Conexao {
 		}
 	}
 
-	public void send(Object data) throws IOException {
+	public void send(Serializable data) throws IOException {
 		getOos().writeObject(data);
 	}
 
@@ -119,6 +123,10 @@ public class ConexaoImpl implements Conexao {
 
 	protected ObjectInputStream getOis() {
 		return ois;
+	}
+
+	public boolean isClosed() {
+		return closed;
 	}
 
 	@Override
