@@ -1,6 +1,7 @@
 package pedrociarlini.mesaderpg.net.trabalho;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import trabalho.IMessage;
 
@@ -12,6 +13,11 @@ import trabalho.IMessage;
 public class Message implements IMessage, Serializable {
     
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 12L;
+	
+	/**
      * Bytes da mensagem.
      */
     private byte[] bytes;
@@ -28,10 +34,12 @@ public class Message implements IMessage, Serializable {
      */
     public int setBytes(byte[] b) {
         bytes = new byte[b.length];
-        int i;
-        for (i = 0; i < b.length; i++) {
-            bytes[i] = b[i];
-        }
-        return i + 1;
+        System.arraycopy(b, 0, bytes, 0, b.length);
+        return bytes.length;
+    }
+    
+    @Override
+    public String toString() {
+    	return "Message[ bytes: " + Arrays.toString(bytes) + "]";
     }
 }
