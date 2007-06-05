@@ -9,9 +9,13 @@ import java.net.Socket;
 import trabalho.IConnection;
 import trabalho.IMessage;
 
+/**
+ * O protocolo de transporte usado é o TCP
+ * @author pedro
+ */
 public class Connection implements IConnection {
 
-    Socket socket;
+	Socket socket;
 
     ObjectInputStream receiver;
 
@@ -35,20 +39,6 @@ public class Connection implements IConnection {
         connectionCounter++;
         receiver = new ObjectInputStream(socket.getInputStream());
         sender = new ObjectOutputStream(socket.getOutputStream());
-        /*
-        receiver = new Thread("Recebedora-" + connectionCounter) {
-            @Override
-            public void run() {
-                
-            }
-        };
-        sender = new Thread("Enviadora-" + connectionCounter) {
-            @Override
-            public void run() {
-                
-            }
-        };
-        */
     }
 
     /**
@@ -64,7 +54,10 @@ public class Connection implements IConnection {
     }
 
     /**
-     * Altera os bytes da mensagem passada por parâmetro.
+     * Altera os bytes da mensagem passada por parâmetro, colocando os
+     * bytes que foram enviados pelo host remoto.
+     * 
+     * Esse método bloqueia a execução até que uma nova mensagem esteja disponível.
      * 
      * @param m
      *            Mensagem a ser alterada.
@@ -94,4 +87,11 @@ public class Connection implements IConnection {
         }
         return 0;
     }
+
+    /**
+     * Cria uma nova mensagem, funcionando como fábrica de mensagens.
+     */
+	public IMessage createBlankMessage() {
+		return new Message();
+	}
 }

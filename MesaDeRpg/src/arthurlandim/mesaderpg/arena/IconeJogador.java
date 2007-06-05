@@ -13,6 +13,10 @@ import javax.swing.ImageIcon;
  */
 public class IconeJogador extends ImageIcon {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7161521094067925577L;
 	int x,y;
 
 	public IconeJogador() {

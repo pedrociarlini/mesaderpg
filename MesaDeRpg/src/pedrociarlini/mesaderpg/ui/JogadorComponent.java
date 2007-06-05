@@ -8,7 +8,12 @@ import pedrociarlini.mesaderpg.model.JogadorVO;
 
 public class JogadorComponent extends JLabel {
     
-    public JogadorComponent() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4084681321717585434L;
+
+	public JogadorComponent() {
         super();
     }
 

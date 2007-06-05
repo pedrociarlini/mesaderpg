@@ -7,4 +7,6 @@ public interface IConnection {
     int receive(IMessage m);
 
     void close();
+    
+    IMessage createBlankMessage();
 }
