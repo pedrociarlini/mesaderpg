@@ -45,7 +45,6 @@ class ArenaCanvas extends JPanel {
 					new IconeJogador(
 							ImageIO.read(new File("imagens\\jogador.jpg")), 50, 0) };
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -154,7 +153,6 @@ class ArenaCanvas extends JPanel {
 
 	@Override
 	public void repaint() {
-		// TODO Auto-generated method stub
 		// super.getGraphics().clearRect(0,0,getWidth(),getHeight());
 		super.repaint();
 	}

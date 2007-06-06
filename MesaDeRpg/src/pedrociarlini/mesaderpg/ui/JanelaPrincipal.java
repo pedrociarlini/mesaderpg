@@ -2,6 +2,7 @@ package pedrociarlini.mesaderpg.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 
 import javax.swing.JEditorPane;
@@ -10,17 +11,15 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 
-import pedrociarlini.mesaderpg.model.JogadorVO;
+import pedrociarlini.mesaderpg.business.JogadoresBusiness;
+import pedrociarlini.mesaderpg.ui.action.ConectarJogadorAction;
 import pedrociarlini.mesaderpg.ui.action.ConfigurarJogadorAction;
 import pedrociarlini.mesaderpg.ui.action.RolarDadosAction;
 import pedrociarlini.mesaderpg.ui.action.VisualizarArenaAction;
 import pedrociarlini.mesaderpg.util.MessagesUtil;
-
-import java.awt.FlowLayout;
-import javax.swing.JScrollPane;
-import pedrociarlini.mesaderpg.ui.action.ConectarJogadorAction;
 
 public class JanelaPrincipal extends JFrame {
 
@@ -57,8 +56,6 @@ public class JanelaPrincipal extends JFrame {
     private ConfigurarJogadorAction configurarJogadorAction = null;  //  @jve:decl-index=0:visual-constraint="716,10"
 
     private VisualizarArenaAction visualizarArenaAction = null;  //  @jve:decl-index=0:visual-constraint="716,10"
-
-    private JogadorVO jogador = new JogadorVO(); // @ijv
 
     private JScrollPane scrollPane = null;
 
@@ -162,7 +159,7 @@ public class JanelaPrincipal extends JFrame {
             menuItemJogador.setText(MessagesUtil
                     .getString("JanelaPrincipal.menu.item.jogador")); //$NON-NLS-1$
             getConfigurarJogadorAction().putValue(
-                    ConfigurarJogadorAction.JOGADOR_VO, this.jogador);
+                    ConfigurarJogadorAction.JOGADOR_VO, JogadoresBusiness.getJogadorLocal());
         }
         return menuItemJogador;
     }

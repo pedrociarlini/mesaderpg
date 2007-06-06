@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.uima.internal.util.SerializationUtils;
 
@@ -33,7 +34,7 @@ public class ConexaoTrabalho extends AbstractConexao {
 	 */
 	public ConexaoTrabalho() {
 		connLayer = ConnectionLayerFactory
-				.createConneLayerInstance(ConnLayer.CONN_NAME);
+				.createConnLayerInstance(ConnLayer.CONN_NAME);
 	}
 
 	public ConexaoTrabalho(String ip, int porta) throws IOException {
@@ -43,8 +44,13 @@ public class ConexaoTrabalho extends AbstractConexao {
 	}
 
 	public void open() throws IOException {
+		try {
 		conn = connLayer.openConnection(InetAddress.getByName(getIp()),
 				getPorta());
+		}
+		catch (Exception ex) {
+			throw new IOException(ex.getCause().getMessage());
+		}
 		dataReader = new DataReader(conn);
 		dataReader.start();
 	}
@@ -68,26 +74,41 @@ public class ConexaoTrabalho extends AbstractConexao {
 		return closed;
 	}
 
-    public void acceptConnection(int porta) throws Exception {
-        ServerSocket server = new ServerSocket(porta);
-        Socket client = server.accept();
-        setIp(client.getInetAddress().getHostAddress());
-        setPorta(client.getPort());
-        conn = new Connection(client);
-        dataReader = new DataReader(conn);
-        dataReader.start();
-    }
+	public void acceptConnection(int porta) throws Exception {
+		ServerSocket server = new ServerSocket(porta);
+		Socket client = server.accept();
+		setIp(client.getInetAddress().getHostAddress());
+		setPorta(client.getPort());
+		conn = new Connection(client);
+		dataReader = new DataReader(conn);
+		dataReader.start();
+	}
 
-    /**
-     * Implementa um leitor assícrono dos dados.
-     * @author Pedro Ciarlini
-     *
-     */
+	public Object receive() throws IOException {
+		try {
+			return dataReader.instantReceive();
+		} catch (InterruptedException e) {
+			throw new IOException(e.getMessage());
+		}
+	}
+
+	/**
+	 * Implementa um leitor assícrono dos dados.
+	 * 
+	 * @author Pedro Ciarlini
+	 * 
+	 */
 	private class DataReader extends Thread {
 		private IConnection conn;
 
+		LinkedBlockingQueue<Object> dataQueue = new LinkedBlockingQueue<Object>();
+
 		public DataReader(IConnection conn) {
 			this.conn = conn;
+		}
+
+		public Object instantReceive() throws InterruptedException {
+			return dataQueue.take();
 		}
 
 		public void run() {
@@ -102,6 +123,7 @@ public class ConexaoTrabalho extends AbstractConexao {
 					this.conn.receive(m);
 					data = (Serializable) SerializationUtils.deserialize(m
 							.getBytes());
+					dataQueue.put(data);
 					for (DataReceivedListener listener : ConexaoTrabalho.this
 							.getListeners()) {
 						listener.onDataReceived(new DataEvent(

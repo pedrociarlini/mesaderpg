@@ -3,8 +3,6 @@ package arthurlandim.mesaderpg.arena;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -29,12 +27,9 @@ public class ArenaFrame extends JFrame {
 		panel.setLayout(new GridLayout(1, 2));
 		panel.add(new JLabel("x,y: ", JLabel.RIGHT));
 		container.add(panel, BorderLayout.SOUTH);
+		
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-		addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				System.exit(0);
-			}
-		});
 		setSize(640, 480);
 		setVisible(true);
 	}
@@ -42,6 +37,5 @@ public class ArenaFrame extends JFrame {
 	public static void main(String arg[]) {
 		new ArenaFrame();
 	}
-
 
 }

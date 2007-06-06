@@ -73,8 +73,7 @@ public class JanelaConfigurarJogador extends JDialog implements ActionListener {
             gridBagConstraints4.gridy = 2;
             labelFicha = new JLabel();
             labelFicha
-                    .setText("Vale a pena configurar esalvar a ficha também? "
-                            + "pedrociarlini@gmail.com");
+                    .setText("Vale a pena configurar e salvar a ficha também? pedrociarlini@gmail.com");
             labelFicha.setFont(new Font("Dialog", Font.PLAIN, 10));
             GridBagConstraints gridBagConstraints3 = new GridBagConstraints();
             gridBagConstraints3.gridx = 0;

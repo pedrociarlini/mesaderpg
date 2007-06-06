@@ -140,4 +140,9 @@ public class ConexaoImpl implements Conexao {
         // TODO implementar criação de servidor 
         throw new NotImplementedException();
     }
+
+	public Object receive() throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

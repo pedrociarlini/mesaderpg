@@ -52,16 +52,12 @@ public class AnimationPlayer {
 			janela.setVisible(true);
 			p.start();
 		} catch (NoPlayerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (CannotRealizeException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         */
