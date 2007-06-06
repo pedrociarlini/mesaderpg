@@ -10,6 +10,7 @@ import java.util.Set;
 
 import pedrociarlini.mesaderpg.net.event.DataEvent;
 import pedrociarlini.mesaderpg.net.event.DataReceivedListener;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class ConexaoImpl implements Conexao {
 
@@ -134,4 +135,9 @@ public class ConexaoImpl implements Conexao {
 		return this.getClass().getSimpleName() + "(" + mySequencial + ") - "
 				+ socket.getLocalPort() + " <-->" + socket.getPort();
 	}
+
+    public void acceptConnection(int porta) throws Exception {
+        // TODO implementar criação de servidor 
+        throw new NotImplementedException();
+    }
 }
