@@ -14,6 +14,9 @@ public class ConnLayer implements IConnLayer {
     	ConnectionLayerFactory.registerConnection(CONN_NAME, ConnLayer.class);
     }
 
+    /**
+     * Cria uma nova instância da classe <code>Connection</code>.
+     */
     public IConnection openConnection(InetAddress ip, int porta) {
         Connection conn = null;
         try {
@@ -24,4 +27,5 @@ public class ConnLayer implements IConnLayer {
         }
         return conn;
     }
+  
 }

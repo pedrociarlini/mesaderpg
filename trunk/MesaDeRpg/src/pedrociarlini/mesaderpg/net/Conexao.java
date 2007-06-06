@@ -23,5 +23,7 @@ public interface Conexao {
 	public void close() throws IOException;
 	
 	public boolean isClosed();
+    
+    public void acceptConnection(int porta) throws Exception;
 
 }

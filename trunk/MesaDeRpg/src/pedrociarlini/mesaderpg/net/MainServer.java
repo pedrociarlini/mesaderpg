@@ -9,16 +9,18 @@ import java.util.List;
 import pedrociarlini.mesaderpg.net.event.DataEvent;
 import pedrociarlini.mesaderpg.net.event.DataReceivedListener;
 
-public class ConexaoMainServer implements Runnable {
+public class MainServer implements Runnable {
     
     ServerSocket listener;
+    
+    private int porta;
     
     List<Conexao> clientes = new ArrayList<Conexao>();
     
 	private boolean closed = true;
 
-    public ConexaoMainServer(int port) throws IOException {
-    	listener = new ServerSocket(port);
+    public MainServer(int port) throws IOException {
+    	porta = port;
     }
 
     public void run() {
@@ -26,13 +28,9 @@ public class ConexaoMainServer implements Runnable {
 	    	closed = false;
             Socket client;
             while (!closed) {
-                client = listener.accept();
-                // TESTES
-                /*
-                new ObjectOutputStream(client.getOutputStream())
-						.writeObject(new JogadorVO("Pedro Teste", true));
-				*/
-                Conexao conn = new ConexaoImpl(client);
+                Conexao conn = ConexaoFactory.createConexaoInstance();
+                conn.acceptConnection(porta);
+                
                 conn.addDataReceivedListener(new DataReceivedListener() {
 					public void onDataReceived(DataEvent ev) {
 						System.out.println( ev.getSource() + " - " + ev.getReceivedData());
@@ -42,7 +40,7 @@ public class ConexaoMainServer implements Runnable {
                 
                 // TODO Implementar action para inserir o jogador na lista
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

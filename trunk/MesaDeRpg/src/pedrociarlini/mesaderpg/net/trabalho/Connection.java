@@ -35,7 +35,11 @@ public class Connection implements IConnection {
      *             Para qualquer erro que ocorrer.
      */
     Connection(InetAddress ip, int porta) throws Exception {
-        socket = new Socket(ip, porta);
+        this(new Socket(ip, porta));
+    }
+    
+    public Connection(Socket client) throws Exception {
+        socket = client;
         connectionCounter++;
         receiver = new ObjectInputStream(socket.getInputStream());
         sender = new ObjectOutputStream(socket.getOutputStream());
