@@ -1,21 +1,15 @@
 package pedrociarlini.mesaderpg.net;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 
-import pedrociarlini.mesaderpg.net.event.DataEvent;
-import pedrociarlini.mesaderpg.net.event.DataReceivedListener;
+import pedrociarlini.mesaderpg.ui.action.AceitarConexaoJogador;
 
 public class MainServer implements Runnable {
     
-    ServerSocket listener;
-    
     private int porta;
-    
-    List<Conexao> clientes = new ArrayList<Conexao>();
+
+    Conexao conn;
     
 	private boolean closed = true;
 
@@ -26,29 +20,28 @@ public class MainServer implements Runnable {
     public void run() {
         try {
 	    	closed = false;
-            Socket client;
             while (!closed) {
-                Conexao conn = ConexaoFactory.createConexaoInstance();
+                conn = ConexaoFactory.createConexaoInstance();
                 conn.acceptConnection(porta);
                 
-                conn.addDataReceivedListener(new DataReceivedListener() {
-					public void onDataReceived(DataEvent ev) {
-						System.out.println( ev.getSource() + " - " + ev.getReceivedData());
-					}
-                });
-                clientes.add(conn);
-                
-                // TODO Implementar action para inserir o jogador na lista
+                aceitarJogador(conn);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     
-    public void stopServer() {
+    private void aceitarJogador(Conexao conn) {
+        AceitarConexaoJogador action = new AceitarConexaoJogador();
+        action.putValue(AceitarConexaoJogador.JOGADOR_CONEXAO, conn);
+        action.actionPerformed(new ActionEvent(this, 0,
+				AceitarConexaoJogador.class.getSimpleName()));
+	}
+
+	public void stopServer() {
     	try {
     		closed = true;
-			listener.close();
+    		conn.close();
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		}

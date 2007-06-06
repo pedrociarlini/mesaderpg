@@ -12,7 +12,8 @@ public interface Conexao {
 	 * @throws IOException
 	 */
 	public void send(Serializable obj) throws IOException;
-	
+
+	public Object receive() throws IOException;
 	
 	public void addDataReceivedListener(DataReceivedListener listener);
 	

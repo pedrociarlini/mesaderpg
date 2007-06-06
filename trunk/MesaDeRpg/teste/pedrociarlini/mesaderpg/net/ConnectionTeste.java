@@ -20,7 +20,7 @@ public class ConnectionTeste {
 			
 			Class.forName("pedrociarlini.mesaderpg.net.trabalho.ConnLayer");
 			IConnLayer cl = ConnectionLayerFactory
-					.createConneLayerInstance(ConnLayer.CONN_NAME);
+					.createConnLayerInstance(ConnLayer.CONN_NAME);
 			IConnection conn = cl.openConnection(InetAddress.getByName("localhost"), 5555);
 			
 			IMessage m = conn.createBlankMessage();

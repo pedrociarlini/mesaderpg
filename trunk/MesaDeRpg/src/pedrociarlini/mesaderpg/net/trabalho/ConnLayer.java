@@ -23,7 +23,7 @@ public class ConnLayer implements IConnLayer {
             conn = new Connection(ip, porta);
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            throw new RuntimeException(ex);
         }
         return conn;
     }

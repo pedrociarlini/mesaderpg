@@ -1,5 +1,6 @@
 package pedrociarlini.mesaderpg.net.trabalho;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -70,7 +71,14 @@ public class Connection implements IConnection {
     public int receive(IMessage m) {
         IMessage incomingMessage = null;
         try {
-            incomingMessage = (IMessage) receiver.readObject();
+        	if (socket.isConnected()) {
+        		incomingMessage = (IMessage) receiver.readObject();
+        	}
+        	else {
+        		throw new IOException("Conexão já estava fechada.");
+        	}
+        } catch (EOFException e) {
+        	throw new RuntimeException("Conexão deve ter sido fechada: " + e.getMessage());
         } catch (IOException e) {
             throw new RuntimeException("Erro de I/O: " + e.getMessage());
         } catch (ClassNotFoundException e) {

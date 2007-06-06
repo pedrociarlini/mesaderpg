@@ -28,6 +28,8 @@ public class ConexaoTrabalhoTeste {
 			};
 			conn.addDataReceivedListener(d);
 			conn.open();
+			Object data = conn.receive();
+			System.out.println(data);
 			//conn.close();
 
 		} catch (Exception e) {
@@ -50,6 +52,7 @@ public class ConexaoTrabalhoTeste {
 				m1.setBytes(SerializationUtils.serialize(new JogadorVO("Nome", false)));
 				ois.writeObject(m1);
 				s.close();
+				server.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

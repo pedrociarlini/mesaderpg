@@ -30,7 +30,6 @@ public class ConfigurarJogadorAction extends AbstractAction {
         if (novoJogador != null) {
             fillJogadorVO(novoJogador, jogador);
         }
-        //System.out.println(jogador);
     }
 
     private void fillJogadorVO(JogadorVO source, JogadorVO dest) {

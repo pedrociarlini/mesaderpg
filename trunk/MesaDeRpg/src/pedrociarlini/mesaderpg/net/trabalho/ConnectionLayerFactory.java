@@ -35,14 +35,17 @@ public class ConnectionLayerFactory {
 	 * @throws InstantiationException
 	 * @throws IllegalAccessException
 	 */
-	public static IConnLayer createConneLayerInstance(String connName) {
+	public static IConnLayer createConnLayerInstance(String connName) {
 		IConnLayer result = null;
 		try {
-			result = conns.get(connName).newInstance();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			if (conns.containsKey(connName)) {
+				result = conns.get(connName).newInstance();
+			}
+			else {
+				throw new Exception("A conexão cujo nome de registro é \"" + connName + "\" não existe.");
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
 		return result;
 	}

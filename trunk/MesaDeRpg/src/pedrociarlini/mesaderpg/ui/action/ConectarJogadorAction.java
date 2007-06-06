@@ -2,16 +2,17 @@ package pedrociarlini.mesaderpg.ui.action;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JList;
 
+import pedrociarlini.mesaderpg.business.JogadoresBusiness;
 import pedrociarlini.mesaderpg.model.JogadorVO;
-import pedrociarlini.mesaderpg.net.ConexaoJogador;
+import pedrociarlini.mesaderpg.net.Conexao;
 import pedrociarlini.mesaderpg.ui.JanelaConectarJogador;
 import pedrociarlini.mesaderpg.ui.JogadorComponent;
+import pedrociarlini.mesaderpg.ui.util.MensagensUtil;
 
 
 public class ConectarJogadorAction extends AbstractAction {
@@ -31,23 +32,33 @@ public class ConectarJogadorAction extends AbstractAction {
         putValue(Action.LONG_DESCRIPTION, "Conecta um jogador que esteja na rede.");
     }
 
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent ev) {
         JList listaJogadores = (JList) getValue(JOGADOR_LIST);
         JogadorVO jogador = (JogadorVO) getValue(JOGADOR_VO);;
         JogadorVO remoteJogador = null;
-        ConexaoJogador conn = null;
+        Conexao conn = null;
         try {
             conn = JanelaConectarJogador.showJogadorDialog();
-            int porta = conn.receivePorta();
-            remoteJogador = conn.open(jogador);
-            // TODO Separar conexão da inserção do jogador na lista.
-            remoteJogador.setConn(conn);
-            listaJogadores.add(new JogadorComponent(remoteJogador));
-        } catch (IOException e1) {
-            // TODO Implementar tratamento para o erro.
-            e1.printStackTrace();
-        } catch (ClassNotFoundException e1) {
-            e1.printStackTrace();
+            if(conn != null) {
+            	Object msg = (String) conn.receive();
+            	if (!JogadoresBusiness.CONEXAO_START.equals(msg)) {
+            		throw new Exception("Erro na conexão: Sequência de conexão não esperada.");
+            	}
+            	conn.send(jogador);
+            	msg = (String) conn.receive();
+            	if (!JogadoresBusiness.CONEXAO_SUCCESS.equals(msg)) {
+            		String msgErro = "Jogador não foi aceito para conexão.";
+           			msgErro += "(" + ((Exception)msg).getMessage() + ")";
+            		throw new Exception(msgErro);
+            	}
+            	remoteJogador = (JogadorVO) conn.receive();
+                JogadoresBusiness.conectarJogador(remoteJogador);
+                listaJogadores.add(new JogadorComponent(remoteJogador));
+            }
+        } catch (ClassCastException ex) {
+        	MensagensUtil.showMensagemErro("Erro durante o handshake com o jogador remoto.");
+        } catch (Exception ex) {
+        	MensagensUtil.showMensagemErro(ex.getMessage());
         }
     }
 }
