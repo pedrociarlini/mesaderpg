@@ -1,7 +1,9 @@
 package pedrociarlini.mesaderpg;
 
 import pedrociarlini.mesaderpg.business.JogadoresBusiness;
+import pedrociarlini.mesaderpg.business.ServidorBusiness;
 import pedrociarlini.mesaderpg.model.JogadorVO;
+import pedrociarlini.mesaderpg.model.ServidorVO;
 import pedrociarlini.mesaderpg.ui.JanelaPrincipal;
 
 
@@ -14,6 +16,7 @@ public class ClassePrincipal {
     	registrarClasses();
     	// TODO implementar uma maneira de salvar as configurações locais
     	JogadoresBusiness.setJogadorLocal(new JogadorVO("Player 1", false));
+    	ServidorBusiness.setConfiguracaoServidor(new ServidorVO(5544, 2));
         new JanelaPrincipal().setVisible(true);
     }
 
