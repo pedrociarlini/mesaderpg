@@ -3,7 +3,6 @@ package pedrociarlini.mesaderpg.model;
 import java.io.Serializable;
 
 import pedrociarlini.mesaderpg.net.Conexao;
-import pedrociarlini.mesaderpg.net.ConexaoJogador;
 
 public class JogadorVO implements Serializable {
 
