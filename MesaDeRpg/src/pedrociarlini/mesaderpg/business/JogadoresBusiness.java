@@ -69,7 +69,7 @@ public class JogadoresBusiness {
 		return jogadorLocal;
 	}
 	
-	public static JogadorVO[] getListaJogadores() {
-		return (JogadorVO[]) jogadores.values().toArray();
+	public static Object[] getListaJogadores() {
+		return jogadores.values().toArray();
 	}
 }
