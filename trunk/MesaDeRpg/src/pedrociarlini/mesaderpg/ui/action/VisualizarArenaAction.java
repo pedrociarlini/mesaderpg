@@ -46,11 +46,10 @@ public class VisualizarArenaAction extends AbstractAction {
     			jogador = new JogadorVO();
     			jogador.setNome("Teste " + System.currentTimeMillis());
     			
-        		frame.adicionarJogador(jogador);
+        		//frame.adicionarJogador(jogador);
         		try {
 					sleep(3000);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
     		}

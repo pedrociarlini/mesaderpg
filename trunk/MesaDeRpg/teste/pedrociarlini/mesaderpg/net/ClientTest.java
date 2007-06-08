@@ -14,7 +14,7 @@ public class ClientTest {
 		MainServer server = null;
 		
 		try {
-			server = new MainServer(27000);
+			server = MainServer.createInstance(27000);
 			Thread t = new Thread(server);
 			t.setName("Server");
 			t.start();
