@@ -3,6 +3,7 @@ package pedrociarlini.mesaderpg.business;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.swing.AbstractAction;
 
@@ -16,6 +17,7 @@ public class JogadoresBusiness {
 
 	public static final Serializable CONEXAO_SUCCESS = "SUCCESS";
 
+	private static final Vector<JogadorVO> listaJogadores = new Vector<JogadorVO>();
 
 	private static Map<String, JogadorVO> jogadores = new HashMap<String, JogadorVO>();
 	
@@ -65,5 +67,9 @@ public class JogadoresBusiness {
 	
 	public static JogadorVO getJogadorLocal() {
 		return jogadorLocal;
+	}
+	
+	public static JogadorVO[] getListaJogadores() {
+		return (JogadorVO[]) jogadores.values().toArray();
 	}
 }

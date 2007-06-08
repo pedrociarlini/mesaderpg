@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JLabel;
 import javax.swing.JList;
 
 import pedrociarlini.mesaderpg.business.JogadoresBusiness;
@@ -53,12 +54,25 @@ public class ConectarJogadorAction extends AbstractAction {
             	}
             	remoteJogador = (JogadorVO) conn.receive();
                 JogadoresBusiness.conectarJogador(remoteJogador);
-                listaJogadores.add(new JogadorComponent(remoteJogador));
+//                listaJogadores.add(new JogadorComponent(remoteJogador));
+              listaJogadores.setListData(getJogadorComponents(JogadoresBusiness.getListaJogadores()));
             }
         } catch (ClassCastException ex) {
         	MensagensUtil.showMensagemErro("Erro durante o handshake com o jogador remoto.");
         } catch (Exception ex) {
         	MensagensUtil.showMensagemErro(ex.getMessage());
         }
+    }
+    
+    private JogadorComponent[] getJogadorComponents(JogadorVO[] jogadores) {
+    	JogadorComponent[] result = new JogadorComponent[jogadores.length];
+    	
+    	for (int i=0; i<result.length; i++) {
+    		result[i] = new JogadorComponent(jogadores[i]);
+    	}
+    	
+    	return result;
+    	
+    	
     }
 }
