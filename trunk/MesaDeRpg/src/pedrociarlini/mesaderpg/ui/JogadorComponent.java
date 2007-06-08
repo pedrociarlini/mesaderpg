@@ -15,8 +15,8 @@ public class JogadorComponent extends JLabel {
 
 	public JogadorComponent() {
         super();
-    }
-
+    }	
+	
     public JogadorComponent(Icon image, int horizontalAlignment) {
         super(image, horizontalAlignment);
     }
@@ -52,4 +52,8 @@ public class JogadorComponent extends JLabel {
     protected void setJogador(JogadorVO jogador) {
         this.jogador = jogador;
     }
+    
+    public String toString() {
+		return jogador.getNome();
+	}
 }

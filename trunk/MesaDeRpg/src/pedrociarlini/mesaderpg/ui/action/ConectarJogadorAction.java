@@ -64,11 +64,11 @@ public class ConectarJogadorAction extends AbstractAction {
         }
     }
     
-    private JogadorComponent[] getJogadorComponents(JogadorVO[] jogadores) {
+    private JogadorComponent[] getJogadorComponents(Object[] jogadores) {
     	JogadorComponent[] result = new JogadorComponent[jogadores.length];
     	
     	for (int i=0; i<result.length; i++) {
-    		result[i] = new JogadorComponent(jogadores[i]);
+    		result[i] = new JogadorComponent((JogadorVO)jogadores[i]);
     	}
     	
     	return result;
