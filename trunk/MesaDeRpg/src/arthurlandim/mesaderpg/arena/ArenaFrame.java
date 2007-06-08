@@ -8,7 +8,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class ArenaFrame extends JFrame {
+import pedrociarlini.mesaderpg.model.JogadorVO;
+
+public class ArenaFrame extends JFrame implements ArenaInterface {
 	/**
 	 * 
 	 */
@@ -36,6 +38,16 @@ public class ArenaFrame extends JFrame {
 
 	public static void main(String arg[]) {
 		new ArenaFrame();
+	}
+
+	public void adicionarJogador(JogadorVO jogador) {
+		canvas.adicionarJogador(jogador);
+		
+	}
+
+	public void removerJogador(JogadorVO jogador) {
+		canvas.removerJogador(jogador);
+		
 	}
 
 }
