@@ -12,11 +12,11 @@ import pedrociarlini.mesaderpg.model.JogadorVO;
 import pedrociarlini.mesaderpg.net.Conexao;
 import pedrociarlini.mesaderpg.ui.util.MensagensUtil;
 
-public class AceitarConexaoJogador extends AbstractAction {
+public class AceitarConexaoJogadorAction extends AbstractAction {
 
 	public static final String JOGADOR_CONEXAO = "KEY_JOGADOR_CONEXAO";
 
-	public AceitarConexaoJogador() {
+	public AceitarConexaoJogadorAction() {
 		putValue(Action.NAME, "AceitarConexaoJogador");
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_X);
 		putValue(Action.LONG_DESCRIPTION,
