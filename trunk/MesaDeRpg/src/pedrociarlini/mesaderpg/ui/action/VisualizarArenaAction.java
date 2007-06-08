@@ -6,6 +6,10 @@ import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 
+import pedrociarlini.mesaderpg.model.JogadorVO;
+
+import arthurlandim.mesaderpg.arena.ArenaFrame;
+
 public class VisualizarArenaAction extends AbstractAction {
 
     public VisualizarArenaAction() {
@@ -21,6 +25,35 @@ public class VisualizarArenaAction extends AbstractAction {
 
     public void actionPerformed(ActionEvent e) {
         //System.out.println(jogador);
-    	new arthurlandim.mesaderpg.arena.ArenaFrame().setVisible(true);
+    	ArenaFrame frame = new arthurlandim.mesaderpg.arena.ArenaFrame();
+    	frame.setVisible(true);
+    	new AdicionarJogador(frame).start();
+    }
+    
+    class AdicionarJogador extends Thread {
+    	ArenaFrame frame;
+    	public AdicionarJogador(ArenaFrame frame) {
+			this.frame = frame;
+		}
+    	
+    	@Override
+    	public void run() {
+    		// TODO Auto-generated method stub
+    		super.run();
+    		JogadorVO jogador;
+    		while (true) {
+    			
+    			jogador = new JogadorVO();
+    			jogador.setNome("Teste " + System.currentTimeMillis());
+    			
+        		frame.adicionarJogador(jogador);
+        		try {
+					sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+    		}
+    	}
     }
 }
