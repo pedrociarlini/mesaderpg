@@ -42,13 +42,13 @@ public class Connection implements IConnection {
     public Connection(Socket client) throws Exception {
         socket = client;
         connectionCounter++;
-        receiver = new ObjectInputStream(socket.getInputStream());
         sender = new ObjectOutputStream(socket.getOutputStream());
+        receiver = new ObjectInputStream(socket.getInputStream());
     }
 
     /**
      * Fecha a conexão com a máquina remota.
-     */
+     */	
     public void close() {
         try {
             socket.close();
