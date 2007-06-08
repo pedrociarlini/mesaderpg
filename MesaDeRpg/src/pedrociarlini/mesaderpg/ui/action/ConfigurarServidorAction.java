@@ -25,10 +25,10 @@ public class ConfigurarServidorAction extends AbstractAction {
     private static final long serialVersionUID = 1L;
 
     public void actionPerformed(ActionEvent e) {
-    	ServidorVO jogador = (ServidorVO) getValue(SERVIDOR_VO);
-    	ServidorVO novoJogador = JanelaConfigurarServidor.showServidorDialog(jogador);
-        if (novoJogador != null) {
-            fillServidorVO(novoJogador, jogador);
+    	ServidorVO servidor = (ServidorVO) getValue(SERVIDOR_VO);
+    	ServidorVO novoServidor = JanelaConfigurarServidor.showServidorDialog(servidor);
+        if (novoServidor != null) {
+            fillServidorVO(novoServidor, servidor);
         }
     }
 
