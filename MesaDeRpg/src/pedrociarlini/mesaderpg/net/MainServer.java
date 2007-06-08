@@ -3,6 +3,8 @@ package pedrociarlini.mesaderpg.net;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
+import javax.swing.JList;
+
 import pedrociarlini.mesaderpg.ui.action.AceitarConexaoJogadorAction;
 
 public class MainServer implements Runnable {
@@ -12,6 +14,8 @@ public class MainServer implements Runnable {
 	Conexao conn;
 
 	private boolean closed = true;
+
+	private JList listaJogadores;
 
 	private static MainServer instance;
 
@@ -54,6 +58,7 @@ public class MainServer implements Runnable {
 	private void aceitarJogador(Conexao conn) {
 		AceitarConexaoJogadorAction action = new AceitarConexaoJogadorAction();
 		action.putValue(AceitarConexaoJogadorAction.JOGADOR_CONEXAO, conn);
+		action.putValue(AceitarConexaoJogadorAction.LISTA_JOGADORES, listaJogadores);
 		action.actionPerformed(new ActionEvent(this, 0,
 				AceitarConexaoJogadorAction.class.getSimpleName()));
 	}
@@ -70,5 +75,9 @@ public class MainServer implements Runnable {
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		}
+	}
+
+	public void setListaJogadores(JList listaJogatores) {
+		this.listaJogadores = listaJogatores;
 	}
 }

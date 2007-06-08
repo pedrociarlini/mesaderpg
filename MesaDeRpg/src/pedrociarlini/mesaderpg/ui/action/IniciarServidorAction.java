@@ -8,6 +8,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 
 import pedrociarlini.mesaderpg.business.ServidorBusiness;
 import pedrociarlini.mesaderpg.model.ServidorVO;
@@ -21,6 +22,8 @@ public class IniciarServidorAction extends AbstractAction {
 	public static final String BOTAO_PARAR_SERVIDOR = "KEY_BOTAO_PARAR_SERVIDOR";
 
 	public static final String LABEL_STATUS_SERVIDOR = "KEY_LABEL_STATUS_SERVIDOR";
+
+	public static final String LISTA_JOGADORES = "KEY_LISTA_JOGADORES";
 
 	public IniciarServidorAction() {
 		putValue(Action.NAME, "IniciarServidor");
@@ -37,10 +40,13 @@ public class IniciarServidorAction extends AbstractAction {
 	public void actionPerformed(ActionEvent ev) {
 		JButton butaoIniciar = (JButton) getValue(BOTAO_INICAR_SERVIDOR);
 		JButton butaoParar = (JButton) getValue(BOTAO_PARAR_SERVIDOR);
+		JList listaJogatores = (JList) getValue(LISTA_JOGADORES);
+		
 		JLabel status = (JLabel) getValue(LABEL_STATUS_SERVIDOR);
 		ServidorVO conf = ServidorBusiness.getConfiguracaoServidor();
 		try {
-			MainServer.createInstance(conf.getPorta()).startServer();
+			MainServer server = MainServer.createInstance(conf.getPorta());
+			server.setListaJogadores(listaJogatores);
 			butaoIniciar.setEnabled(false);
 			butaoParar.setEnabled(true);
 			status.setText("Iniciado");

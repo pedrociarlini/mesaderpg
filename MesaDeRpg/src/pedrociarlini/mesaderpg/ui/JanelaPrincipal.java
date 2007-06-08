@@ -368,6 +368,12 @@ public class JanelaPrincipal extends JFrame {
 			menuItemConectarJogador = new JMenuItem();
 			menuItemConectarJogador.setAction(getConectarJogadorAction());
 			menuItemConectarJogador.setText("Jogador");
+			getConectarJogadorAction().putValue(
+					ConectarJogadorAction.JOGADOR_VO,
+					JogadoresBusiness.getJogadorLocal());
+			getConectarJogadorAction().putValue(
+					ConectarJogadorAction.JOGADOR_LIST,
+					getPanelJogadores().getListJogadores());
 		}
 		return menuItemConectarJogador;
 	}
@@ -397,9 +403,9 @@ public class JanelaPrincipal extends JFrame {
 	}
 
 	/**
-	 * This method initializes panelServidorStatus	
-	 * 	
-	 * @return pedrociarlini.mesaderpg.ui.PanelServidorStatus	
+	 * This method initializes panelServidorStatus
+	 * 
+	 * @return pedrociarlini.mesaderpg.ui.PanelServidorStatus
 	 */
 	private PanelServidorStatus getPanelServidorStatus() {
 		if (panelServidorStatus == null) {
