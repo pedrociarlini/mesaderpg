@@ -1,17 +1,9 @@
-/**
- * 
- */
 package arthurlandim.mesaderpg.arena;
 
 import pedrociarlini.mesaderpg.model.JogadorVO;
 
-/**
- * @author Familia
- *
- */
 public interface ArenaInterface {
+	public void adicionarJogador(JogadorVO jogador);
 
-	void adicionarJogador(JogadorVO jogador);
-	void removerJogador(JogadorVO jogador);
-	
+	public void removerJogador(JogadorVO jogador);
 }
