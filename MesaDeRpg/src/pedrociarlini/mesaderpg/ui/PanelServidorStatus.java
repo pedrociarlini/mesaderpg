@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import pedrociarlini.mesaderpg.ui.action.IniciarServidorAction;
@@ -25,6 +26,8 @@ public class PanelServidorStatus extends JPanel {
 	private IniciarServidorAction iniciarServidorAction = null; // @jve:decl-index=0:visual-constraint="386,14"
 
 	private PararServidorAction pararServidorAction = null; // @jve:decl-index=0:visual-constraint="385,62"
+
+	private JList jogadores;
 
 	/**
 	 * This is the default constructor
@@ -73,6 +76,8 @@ public class PanelServidorStatus extends JPanel {
 					getButtonParar());
 			getIniciarServidorAction().putValue(
 					IniciarServidorAction.LABEL_STATUS_SERVIDOR, labelStatus);
+			getIniciarServidorAction().putValue(
+					IniciarServidorAction.LISTA_JOGADORES, jogadores);
 		}
 		return buttonIniciar;
 	}
@@ -122,6 +127,12 @@ public class PanelServidorStatus extends JPanel {
 			pararServidorAction = new PararServidorAction();
 		}
 		return pararServidorAction;
+	}
+
+	public void setListJogadores(JList jogadores) {
+		this.jogadores = jogadores;
+		getIniciarServidorAction().putValue(
+				IniciarServidorAction.LISTA_JOGADORES, jogadores);
 	}
 
 } // @jve:decl-index=0:visual-constraint="10,10"
