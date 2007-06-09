@@ -175,11 +175,7 @@ public class JanelaPrincipal extends JFrame {
 					JanelaChat chat = new JanelaChat(JogadoresBusiness.getJogador(nome));
 				}
 			});
-			menuItemChat.setText(MessagesUtil
-					.getString("JanelaPrincipal.menu.item.jogador")); //$NON-NLS-1$
-			getConfigurarJogadorAction().putValue(
-					ConfigurarJogadorAction.JOGADOR_VO,
-					JogadoresBusiness.getJogadorLocal());
+			menuItemChat.setText("Chat");
 		}
 		return menuItemChat;
 	}

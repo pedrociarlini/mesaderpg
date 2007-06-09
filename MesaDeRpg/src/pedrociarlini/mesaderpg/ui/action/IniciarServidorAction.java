@@ -47,6 +47,7 @@ public class IniciarServidorAction extends AbstractAction {
 		try {
 			MainServer server = MainServer.createInstance(conf.getPorta());
 			server.setListaJogadores(listaJogatores);
+			server.startServer();
 			butaoIniciar.setEnabled(false);
 			butaoParar.setEnabled(true);
 			status.setText("Iniciado");
