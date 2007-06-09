@@ -3,6 +3,8 @@ package pedrociarlini.mesaderpg.ui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
@@ -35,6 +37,8 @@ public class JanelaPrincipal extends JFrame {
 	private JMenu menuConfigurar = null;
 
 	private JMenuItem menuItemJogador = null;
+
+	private JMenuItem menuItemChat = null;
 
 	private JMenuBar menuBarPrincipal = null;
 
@@ -160,6 +164,31 @@ public class JanelaPrincipal extends JFrame {
 	 * 
 	 * @return javax.swing.JMenuItem
 	 */
+	private JMenuItem getMenuItemChat() {
+		if (menuItemChat == null) {
+			menuItemChat = new JMenuItem();
+			menuItemChat.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					String nome = ((JogadorComponent) getPanelJogadores()
+							.getListJogadores().getSelectedValue())
+							.getJogador().getNome();
+					JanelaChat chat = new JanelaChat(JogadoresBusiness.getJogador(nome));
+				}
+			});
+			menuItemChat.setText(MessagesUtil
+					.getString("JanelaPrincipal.menu.item.jogador")); //$NON-NLS-1$
+			getConfigurarJogadorAction().putValue(
+					ConfigurarJogadorAction.JOGADOR_VO,
+					JogadoresBusiness.getJogadorLocal());
+		}
+		return menuItemChat;
+	}
+
+	/**
+	 * This method initializes menuItemJogador
+	 * 
+	 * @return javax.swing.JMenuItem
+	 */
 	private JMenuItem getMenuItemJogador() {
 		if (menuItemJogador == null) {
 			menuItemJogador = new JMenuItem();
@@ -216,6 +245,7 @@ public class JanelaPrincipal extends JFrame {
 			menuConectar.setText(MessagesUtil
 					.getString("JanelaPrincipal.menu.conectar")); //$NON-NLS-1$
 			menuConectar.add(getMenuItemConectarJogador());
+			menuConectar.add(getMenuItemChat());
 		}
 		return menuConectar;
 	}
@@ -312,7 +342,7 @@ public class JanelaPrincipal extends JFrame {
 	 * 
 	 * @return pedrociarlini.rolardados.ui.PanelJogadores
 	 */
-	private PanelJogadores getPanelJogadores() {
+	public PanelJogadores getPanelJogadores() {
 		if (panelJogadores == null) {
 			panelJogadores = new PanelJogadores();
 			panelJogadores.getRolarDadosAction().putValue(
@@ -410,6 +440,8 @@ public class JanelaPrincipal extends JFrame {
 	private PanelServidorStatus getPanelServidorStatus() {
 		if (panelServidorStatus == null) {
 			panelServidorStatus = new PanelServidorStatus();
+			panelServidorStatus.setListJogadores(getPanelJogadores()
+					.getListJogadores());
 		}
 		return panelServidorStatus;
 	}
