@@ -20,6 +20,8 @@ import trabalho.IMessage;
 
 public class ConexaoTrabalho extends AbstractConexao {
 
+	private static ServerSocket server;
+
 	private IConnection conn;
 
 	DataReader dataReader;
@@ -68,6 +70,10 @@ public class ConexaoTrabalho extends AbstractConexao {
 	public void close() throws IOException {
 		closed = true;
 		conn.close();
+		if (server != null) {
+			server.close();
+			server = null;
+		}
 	}
 
 	public boolean isClosed() {
@@ -75,7 +81,9 @@ public class ConexaoTrabalho extends AbstractConexao {
 	}
 
 	public void acceptConnection(int porta) throws Exception {
-		ServerSocket server = new ServerSocket(porta);
+		if(server == null) {
+			server = new ServerSocket(porta);
+		}
 		Socket client = server.accept();
 		setIp(client.getInetAddress().getHostAddress());
 		setPorta(client.getPort());
