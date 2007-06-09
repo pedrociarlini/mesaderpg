@@ -45,8 +45,11 @@ public class AceitarConexaoJogadorAction extends AbstractAction {
 			conn.send(JogadoresBusiness.getJogadorLocal());
 			conn.addDataReceivedListener(JogadoresBusiness
 					.createJogadorListener(jogador.getNome()));
-			listaJogatores.add(new JogadorComponent(jogador));
-		} catch (Exception ex) {
+			listaJogatores.setListData(getJogadorComponents(JogadoresBusiness
+					.getListaJogadores()));
+			System.out.println("POEPOEPOEPOEPO");
+			
+		} catch (Throwable ex) {
 			try {
 				conn.send(ex);
 			} catch (IOException e) {
@@ -54,5 +57,13 @@ public class AceitarConexaoJogadorAction extends AbstractAction {
 						+ e.getMessage());
 			}
 		}
+	}
+
+	private JogadorComponent[] getJogadorComponents(Object[] jogadores) {
+		JogadorComponent[] jogs = new JogadorComponent[jogadores.length];
+		for (int i = 0; i < jogadores.length; i++) {
+			jogs[i] = new JogadorComponent((JogadorVO)jogadores[i]);
+		}
+		return jogs;
 	}
 }
