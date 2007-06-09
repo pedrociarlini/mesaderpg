@@ -3,21 +3,20 @@ package pedrociarlini.mesaderpg.business;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Vector;
 
 import javax.swing.AbstractAction;
 
+import pedrociarlini.mesaderpg.model.ChatMensagemVO;
 import pedrociarlini.mesaderpg.model.JogadorVO;
 import pedrociarlini.mesaderpg.net.event.DataEvent;
 import pedrociarlini.mesaderpg.net.event.DataReceivedListener;
+import pedrociarlini.mesaderpg.ui.JanelaChat;
 
 public class JogadoresBusiness {
 
 	public static final Serializable CONEXAO_START = "OK";
 
 	public static final Serializable CONEXAO_SUCCESS = "SUCCESS";
-
-	private static final Vector<JogadorVO> listaJogadores = new Vector<JogadorVO>();
 
 	private static Map<String, JogadorVO> jogadores = new HashMap<String, JogadorVO>();
 	
@@ -57,6 +56,14 @@ public class JogadoresBusiness {
 			if (data instanceof AbstractAction) {
 				System.out.println("Ação executada!!!");
 			}
+			else if (data instanceof ChatMensagemVO) {
+				ChatMensagemVO mensagem = (ChatMensagemVO) data;
+				JanelaChat chat = JanelaChat.getChat(mensagem.getJogadorNome());
+				if(chat == null) {
+					chat = new JanelaChat(getJogador(mensagem.getJogadorNome()));
+				}
+				chat.appendMensagem(mensagem);
+			}
 			System.out.println("Dados chegando (" + nome + ": " + data);
 		}
 	}
@@ -68,8 +75,12 @@ public class JogadoresBusiness {
 	public static JogadorVO getJogadorLocal() {
 		return jogadorLocal;
 	}
-	
+
 	public static Object[] getListaJogadores() {
 		return jogadores.values().toArray();
+	}
+
+	public static JogadorVO getJogador(String nome) {
+		return jogadores.get(nome);
 	}
 }
