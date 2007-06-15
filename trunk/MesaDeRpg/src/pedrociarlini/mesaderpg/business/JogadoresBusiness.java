@@ -43,6 +43,13 @@ public class JogadoresBusiness {
 		return new JogadorListener(nome);
 	}
 
+	/**
+	 * Implementa o listener padrão para dados vindos de um jogador remoto.
+	 * TODO documentar melhor.
+	 * TODO verificar viabilidade de colocar essa classe em outro local.
+	 * @author Pedro Ciarlini
+	 *
+	 */
 	private static class JogadorListener implements DataReceivedListener {
 
 		private String nome;

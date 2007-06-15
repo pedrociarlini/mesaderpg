@@ -15,4 +15,13 @@ public class MensagensUtil {
 				JOptionPane.ERROR_MESSAGE);
 	}
 
+	/**
+	 * Exibe uma tela de alerta.
+	 * @param Mensagem a ser exibida.
+	 */
+	public static void showMensagemAlerta(String msg) {
+		JOptionPane.showMessageDialog(null, msg, "Atenção",
+				JOptionPane.WARNING_MESSAGE);
+	}
+
 }

@@ -47,7 +47,6 @@ public class AceitarConexaoJogadorAction extends AbstractAction {
 					.createJogadorListener(jogador.getNome()));
 			listaJogatores.setListData(getJogadorComponents(JogadoresBusiness
 					.getListaJogadores()));
-			System.out.println("POEPOEPOEPOEPO");
 			
 		} catch (Throwable ex) {
 			try {
