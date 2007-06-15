@@ -60,10 +60,11 @@ public class JanelaChat extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent arg0) {
 		try {
-			jogador.getConn().send(
-					new ChatMensagemVO(textMensagem.getText(), jogador
-							.getNome()));
+			ChatMensagemVO msg = new ChatMensagemVO(textMensagem.getText(), jogador
+					.getNome());
+			jogador.getConn().send(msg);
 			textMensagem.setText("");
+			appendMensagem(msg);
 		} catch (IOException e) {
 			MensagensUtil.showMensagemErro("Erro ao enviar mensagem: "
 					+ e.getMessage());

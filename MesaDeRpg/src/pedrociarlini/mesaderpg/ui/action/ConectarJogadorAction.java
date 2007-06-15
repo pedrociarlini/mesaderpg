@@ -53,9 +53,9 @@ public class ConectarJogadorAction extends AbstractAction {
             		throw new Exception(msgErro);
             	}
             	remoteJogador = (JogadorVO) conn.receive();
+            	remoteJogador.setConn(conn);
                 JogadoresBusiness.conectarJogador(remoteJogador);
-//                listaJogadores.add(new JogadorComponent(remoteJogador));
-              listaJogadores.setListData(getJogadorComponents(JogadoresBusiness.getListaJogadores()));
+                listaJogadores.setListData(getJogadorComponents(JogadoresBusiness.getListaJogadores()));
             }
         } catch (ClassCastException ex) {
         	MensagensUtil.showMensagemErro("Erro durante o handshake com o jogador remoto.");

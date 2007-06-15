@@ -22,6 +22,7 @@ import pedrociarlini.mesaderpg.ui.action.ConfigurarJogadorAction;
 import pedrociarlini.mesaderpg.ui.action.ConfigurarServidorAction;
 import pedrociarlini.mesaderpg.ui.action.RolarDadosAction;
 import pedrociarlini.mesaderpg.ui.action.VisualizarArenaAction;
+import pedrociarlini.mesaderpg.ui.util.MensagensUtil;
 import pedrociarlini.mesaderpg.util.MessagesUtil;
 
 public class JanelaPrincipal extends JFrame {
@@ -169,10 +170,16 @@ public class JanelaPrincipal extends JFrame {
 			menuItemChat = new JMenuItem();
 			menuItemChat.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					String nome = ((JogadorComponent) getPanelJogadores()
-							.getListJogadores().getSelectedValue())
-							.getJogador().getNome();
-					JanelaChat chat = new JanelaChat(JogadoresBusiness.getJogador(nome));
+					JogadorComponent jog = ((JogadorComponent) getPanelJogadores()
+							.getListJogadores().getSelectedValue());
+					if (jog != null) {
+						String nome = ((JogadorComponent) getPanelJogadores()
+								.getListJogadores().getSelectedValue())
+								.getJogador().getNome();
+						new JanelaChat(JogadoresBusiness.getJogador(nome));
+					} else {
+						MensagensUtil.showMensagemAlerta("Nenhum jogador selecionado");
+					}
 				}
 			});
 			menuItemChat.setText("Chat");
