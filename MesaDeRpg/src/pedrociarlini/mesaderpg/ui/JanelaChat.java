@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import pedrociarlini.mesaderpg.business.JogadoresBusiness;
 import pedrociarlini.mesaderpg.model.ChatMensagemVO;
 import pedrociarlini.mesaderpg.model.JogadorVO;
 import pedrociarlini.mesaderpg.ui.util.MensagensUtil;
@@ -27,6 +28,13 @@ public class JanelaChat extends JFrame implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Guarda um mapa onde a chave é o nome de um jogador e o valor é uma janela
+	 * de chat para esse jogador.
+	 * <pre>
+	 * chats = {nomeJogador => JanelaChat, ...}
+	 * </pre>
+	 */
 	private static Map<String, JanelaChat> chats = new HashMap<String, JanelaChat>();
 
 	private JButton btEnviar;
@@ -43,13 +51,15 @@ public class JanelaChat extends JFrame implements ActionListener {
 
 		setTitle("Chat com " + jogador.getNome());
 		setSize(300, 200);
-		
+
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
 		btEnviar = new JButton("Enviar");
 		btEnviar.addActionListener(this);
 		taLog = new JTextArea();
 		taLog.setEditable(false);
 		textMensagem = new JTextField();
-		textMensagem.setPreferredSize(new Dimension(120,50));
+		textMensagem.setPreferredSize(new Dimension(120, 50));
 		getContentPane().add(new JScrollPane(taLog), BorderLayout.CENTER);
 		JPanel panelComandos = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		panelComandos.add(textMensagem);
@@ -60,8 +70,8 @@ public class JanelaChat extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent arg0) {
 		try {
-			ChatMensagemVO msg = new ChatMensagemVO(textMensagem.getText(), jogador
-					.getNome());
+			ChatMensagemVO msg = new ChatMensagemVO(textMensagem.getText(),
+					JogadoresBusiness.getJogadorLocal().getNome());
 			jogador.getConn().send(msg);
 			textMensagem.setText("");
 			appendMensagem(msg);
@@ -78,5 +88,11 @@ public class JanelaChat extends JFrame implements ActionListener {
 	public void appendMensagem(ChatMensagemVO mensagem) {
 		taLog.append("\n" + mensagem.getJogadorNome() + " diz: "
 				+ mensagem.getMensagem());
+	}
+
+	@Override
+	public void dispose() {
+		chats.remove(jogador.getNome());
+		super.dispose();
 	}
 }
