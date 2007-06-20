@@ -41,7 +41,6 @@ class ArenaCanvas extends JPanel implements ArenaInterface {
 		try {
 			joga = new IconeJogador(ImageIO.read(new File("imagens\\jogador.jpg")), 10, 10, jogador.getNome());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		jogadores.add(joga);
@@ -56,7 +55,6 @@ class ArenaCanvas extends JPanel implements ArenaInterface {
 		try {
 			joga = new IconeJogador(ImageIO.read(new File("imagens\\jogador.jpg")), 10, 10, jogador.getNome());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="RolarDados" default="deploy" basedir=".">
+<project name="MesaDeRpg" default="deploy" basedir=".">
 	<property file="build.properties" />
 
 	<target name="deploy" depends="clean">
@@ -8,7 +8,7 @@
 				<attribute name="Main-Class" value="pedrociarlini.mesaderpg.ClassePrincipal" />
 				<attribute name="Java-Bean" value="false" />
 				<!-- attribute name="Name" value="so\Deadlock.class" / -->
-				<!-- attribute name="Class-Path" value="jacksum.jar" / -->
+				<attribute name="Class-Path" value="uima-core.jar"/>
 			</manifest>
 			<fileset dir="classes" includes="**/*" />
 			<!-- fileset dir="src" includes="**/*" / -->

@@ -19,9 +19,8 @@ public class JogadoresBusiness {
 	public static final Serializable CONEXAO_SUCCESS = "SUCCESS";
 
 	private static Map<String, JogadorVO> jogadores = new HashMap<String, JogadorVO>();
-	
-	private static JogadorVO jogadorLocal;
 
+	private static JogadorVO jogadorLocal;
 
 	/**
 	 * Insere um jogador na lista de jogadores da aplicação. Verifica se existe
@@ -44,11 +43,12 @@ public class JogadoresBusiness {
 	}
 
 	/**
-	 * Implementa o listener padrão para dados vindos de um jogador remoto.
-	 * TODO documentar melhor.
-	 * TODO verificar viabilidade de colocar essa classe em outro local.
+	 * Implementa o listener padrão para dados vindos de um jogador remoto. TODO
+	 * documentar melhor. TODO verificar viabilidade de colocar essa classe em
+	 * outro local.
+	 * 
 	 * @author Pedro Ciarlini
-	 *
+	 * 
 	 */
 	private static class JogadorListener implements DataReceivedListener {
 
@@ -59,26 +59,36 @@ public class JogadoresBusiness {
 		}
 
 		public void onDataReceived(DataEvent ev) {
-			Object data = ev.getReceivedData();
-			if (data instanceof AbstractAction) {
-				System.out.println("Ação executada!!!");
-			}
-			else if (data instanceof ChatMensagemVO) {
-				ChatMensagemVO mensagem = (ChatMensagemVO) data;
-				JanelaChat chat = JanelaChat.getChat(mensagem.getJogadorNome());
-				if(chat == null) {
-					chat = new JanelaChat(getJogador(mensagem.getJogadorNome()));
+			try {
+				Object data = ev.getReceivedData();
+				if (data instanceof AbstractAction) {
+					System.out.println("Ação CHEGOU!!!");
+				} else if (data instanceof ChatMensagemVO) {
+					ChatMensagemVO mensagem = (ChatMensagemVO) data;
+					JanelaChat chat = JanelaChat.getChat(mensagem
+							.getJogadorNome());
+					if (chat == null) {
+						chat = new JanelaChat(getJogador(mensagem
+								.getJogadorNome()));
+					}
+					else if (!chat.isVisible()) {
+						
+					}
+					chat.appendMensagem(mensagem);
 				}
-				chat.appendMensagem(mensagem);
+				System.out.println("Dados chegando (" + nome + ": " + data
+						+ ")");
+			} catch (Exception ex) {
+				//TODO Implementar indireção de exibição de mensagens de erro.
+				System.err.println(ex.getClass().getSimpleName() + ": " + ex.getMessage());
 			}
-			System.out.println("Dados chegando (" + nome + ": " + data);
 		}
 	}
 
 	public static void setJogadorLocal(JogadorVO jogador) {
 		jogadorLocal = jogador;
 	}
-	
+
 	public static JogadorVO getJogadorLocal() {
 		return jogadorLocal;
 	}
