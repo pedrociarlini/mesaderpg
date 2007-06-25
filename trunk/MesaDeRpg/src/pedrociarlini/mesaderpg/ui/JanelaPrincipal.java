@@ -3,8 +3,6 @@ package pedrociarlini.mesaderpg.ui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
@@ -22,7 +20,6 @@ import pedrociarlini.mesaderpg.ui.action.ConfigurarJogadorAction;
 import pedrociarlini.mesaderpg.ui.action.ConfigurarServidorAction;
 import pedrociarlini.mesaderpg.ui.action.RolarDadosAction;
 import pedrociarlini.mesaderpg.ui.action.VisualizarArenaAction;
-import pedrociarlini.mesaderpg.ui.util.MensagensUtil;
 import pedrociarlini.mesaderpg.util.MessagesUtil;
 
 public class JanelaPrincipal extends JFrame {
@@ -92,8 +89,7 @@ public class JanelaPrincipal extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setJMenuBar(getMenuBarPrincipal());
 		this.setContentPane(getPrincipalPane());
-		this
-				.setTitle(MessagesUtil
+		this.setTitle(MessagesUtil
 						.getString("JanelaPrincipal.application.name")
 						+ MessagesUtil
 								.getString("JanelaPrincipal.application.version")); //$NON-NLS-1$ //$NON-NLS-2$
@@ -161,27 +157,14 @@ public class JanelaPrincipal extends JFrame {
 	}
 
 	/**
-	 * This method initializes menuItemJogador
+	 * This method initializes getMenuItemChat
 	 * 
 	 * @return javax.swing.JMenuItem
 	 */
 	private JMenuItem getMenuItemChat() {
 		if (menuItemChat == null) {
 			menuItemChat = new JMenuItem();
-			menuItemChat.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					JogadorComponent jog = ((JogadorComponent) getPanelJogadores()
-							.getListJogadores().getSelectedValue());
-					if (jog != null) {
-						String nome = ((JogadorComponent) getPanelJogadores()
-								.getListJogadores().getSelectedValue())
-								.getJogador().getNome();
-						new JanelaChat(JogadoresBusiness.getJogador(nome));
-					} else {
-						MensagensUtil.showMensagemAlerta("Nenhum jogador selecionado");
-					}
-				}
-			});
+			menuItemChat.setAction(getPanelJogadores().getIniciarChatAction());
 			menuItemChat.setText("Chat");
 		}
 		return menuItemChat;

@@ -43,13 +43,12 @@ public class JogadorComponent extends JLabel {
     }
 
     private JogadorVO jogador;
-
     
-    protected JogadorVO getJogador() {
+    public JogadorVO getJogador() {
         return jogador;
     }
 
-    protected void setJogador(JogadorVO jogador) {
+    public void setJogador(JogadorVO jogador) {
         this.jogador = jogador;
     }
     

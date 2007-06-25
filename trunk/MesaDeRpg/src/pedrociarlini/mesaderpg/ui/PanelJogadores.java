@@ -10,114 +10,132 @@ import javax.swing.JPanel;
 
 import pedrociarlini.mesaderpg.ui.action.RolarDadosAction;
 import pedrociarlini.mesaderpg.util.MessagesUtil;
+import pedrociarlini.mesaderpg.ui.action.IniciarChatAction;
 
 public class PanelJogadores extends JPanel {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private JPanel panelBotoes = null;
+	private JPanel panelBotoes = null;
 
-    private JButton buttonEnviarMensagem = null;
+	private JButton buttonEnviarMensagem = null;
 
-    private JButton buttonRolarDados = null;
+	private JButton buttonRolarDados = null;
 
-    private JList listJogadores = null;
+	private JList listJogadores = null;
 
-    private RolarDadosAction rolarDadosAction = null; // @jve:decl-index=0:visual-constraint="236,15"
+	private RolarDadosAction rolarDadosAction = null; // @jve:decl-index=0:visual-constraint="236,15"
 
-    /**
-     * This is the default constructor
-     */
-    public PanelJogadores() {
-        super();
-        initialize();
-    }
+	private IniciarChatAction iniciarChatAction = null; // @jve:decl-index=0:visual-constraint="240,59"
 
-    /**
-     * This method initializes this
-     * 
-     * @return void
-     */
-    private void initialize() {
-        BorderLayout borderLayout = new BorderLayout();
-        borderLayout.setHgap(0);
-        borderLayout.setVgap(0);
-        this.setLayout(borderLayout);
-        this.setSize(154, 224);
-        this.add(getPanelBotoes(), BorderLayout.SOUTH);
-        this.add(getListJogadores(), BorderLayout.CENTER);
-    }
+	/**
+	 * This is the default constructor
+	 */
+	public PanelJogadores() {
+		super();
+		initialize();
+	}
 
-    /**
-     * This method initializes panelBotoes
-     * 
-     * @return javax.swing.JPanel
-     */
-    private JPanel getPanelBotoes() {
-        if (panelBotoes == null) {
-            GridLayout gridLayout1 = new GridLayout();
-            gridLayout1.setRows(2);
-            panelBotoes = new JPanel();
-            panelBotoes.setLayout(gridLayout1);
-            panelBotoes.add(getButtonEnviarMensagem(), null);
-            panelBotoes.add(getButtonRolarDados(), null);
-        }
-        return panelBotoes;
-    }
+	/**
+	 * This method initializes this
+	 * 
+	 * @return void
+	 */
+	private void initialize() {
+		BorderLayout borderLayout = new BorderLayout();
+		borderLayout.setHgap(0);
+		borderLayout.setVgap(0);
+		this.setLayout(borderLayout);
+		this.setSize(154, 224);
+		this.add(getPanelBotoes(), BorderLayout.SOUTH);
+		this.add(getListJogadores(), BorderLayout.CENTER);
+	}
 
-    /**
-     * This method initializes buttonEnviarMensagem
-     * 
-     * @return javax.swing.JButton
-     */
-    private JButton getButtonEnviarMensagem() {
-        if (buttonEnviarMensagem == null) {
-            buttonEnviarMensagem = new JButton();
-            buttonEnviarMensagem.setText(MessagesUtil
-                    .getString("PanelJogadores.button.enviarMensagem")); //$NON-NLS-1$
-            buttonEnviarMensagem.setFont(new Font("Dialog", Font.BOLD, 10)); //$NON-NLS-1$
-        }
-        return buttonEnviarMensagem;
-    }
+	/**
+	 * This method initializes panelBotoes
+	 * 
+	 * @return javax.swing.JPanel
+	 */
+	private JPanel getPanelBotoes() {
+		if (panelBotoes == null) {
+			GridLayout gridLayout1 = new GridLayout();
+			gridLayout1.setRows(2);
+			panelBotoes = new JPanel();
+			panelBotoes.setLayout(gridLayout1);
+			panelBotoes.add(getButtonEnviarMensagem(), null);
+			panelBotoes.add(getButtonRolarDados(), null);
+		}
+		return panelBotoes;
+	}
 
-    /**
-     * This method initializes buttonRolarDados
-     * 
-     * @return javax.swing.JButton
-     */
-    private JButton getButtonRolarDados() {
-        if (buttonRolarDados == null) {
-            buttonRolarDados = new JButton();
-            buttonRolarDados.setAction(getRolarDadosAction());
-            buttonRolarDados.setFont(new Font("Dialog", Font.BOLD, 10)); //$NON-NLS-1$
-            buttonRolarDados.setText(MessagesUtil
-                    .getString("PanelJogadores.button.rolarDados")); //$NON-NLS-1$
-        }
-        return buttonRolarDados;
-    }
+	/**
+	 * This method initializes buttonEnviarMensagem
+	 * 
+	 * @return javax.swing.JButton
+	 */
+	private JButton getButtonEnviarMensagem() {
+		if (buttonEnviarMensagem == null) {
+			buttonEnviarMensagem = new JButton();
+			buttonEnviarMensagem.setAction(getIniciarChatAction());
+			buttonEnviarMensagem.setText(MessagesUtil
+					.getString("PanelJogadores.button.enviarMensagem")); //$NON-NLS-1$
+			buttonEnviarMensagem.setFont(new Font("Dialog", Font.BOLD, 10)); //$NON-NLS-1$
+		}
+		return buttonEnviarMensagem;
+	}
 
-    /**
-     * This method initializes listJogadores
-     * 
-     * @return javax.swing.JList
-     */
-    public JList getListJogadores() {
-        if (listJogadores == null) {
-            listJogadores = new JList();
-        }
-        return listJogadores;
-    }
+	/**
+	 * This method initializes buttonRolarDados
+	 * 
+	 * @return javax.swing.JButton
+	 */
+	private JButton getButtonRolarDados() {
+		if (buttonRolarDados == null) {
+			buttonRolarDados = new JButton();
+			buttonRolarDados.setAction(getRolarDadosAction());
+			buttonRolarDados.setFont(new Font("Dialog", Font.BOLD, 10)); //$NON-NLS-1$
+			buttonRolarDados.setText(MessagesUtil
+					.getString("PanelJogadores.button.rolarDados")); //$NON-NLS-1$
+		}
+		return buttonRolarDados;
+	}
 
-    /**
-     * This method initializes rolarDadosAction
-     * 
-     * @return pedrociarlini.rolardados.ui.RolarDadosAction
-     */
-    RolarDadosAction getRolarDadosAction() {
-        if (rolarDadosAction == null) {
-            rolarDadosAction = new RolarDadosAction();
-        }
-        return rolarDadosAction;
-    }
+	/**
+	 * This method initializes listJogadores
+	 * 
+	 * @return javax.swing.JList
+	 */
+	public JList getListJogadores() {
+		if (listJogadores == null) {
+			listJogadores = new JList();
+		}
+		return listJogadores;
+	}
+
+	/**
+	 * This method initializes rolarDadosAction
+	 * 
+	 * @return pedrociarlini.rolardados.ui.RolarDadosAction
+	 */
+	RolarDadosAction getRolarDadosAction() {
+		if (rolarDadosAction == null) {
+			rolarDadosAction = new RolarDadosAction();
+		}
+		return rolarDadosAction;
+	}
+
+	/**
+	 * This method initializes iniciarChatAction
+	 * 
+	 * @return pedrociarlini.mesaderpg.ui.action.IniciarChatAction
+	 */
+	public IniciarChatAction getIniciarChatAction() {
+		if (iniciarChatAction == null) {
+			iniciarChatAction = new IniciarChatAction();
+			iniciarChatAction.putValue(IniciarChatAction.JLIST_JOGADORES,
+					getListJogadores());
+		}
+		return iniciarChatAction;
+	}
 
 } // @jve:decl-index=0:visual-constraint="10,10"

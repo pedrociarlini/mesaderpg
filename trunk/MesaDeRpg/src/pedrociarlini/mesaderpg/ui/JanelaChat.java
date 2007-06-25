@@ -2,7 +2,6 @@ package pedrociarlini.mesaderpg.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -31,8 +30,9 @@ public class JanelaChat extends JFrame implements ActionListener {
 	/**
 	 * Guarda um mapa onde a chave é o nome de um jogador e o valor é uma janela
 	 * de chat para esse jogador.
+	 * 
 	 * <pre>
-	 * chats = {nomeJogador => JanelaChat, ...}
+	 * chats = {nomeJogador =&gt; JanelaChat, ...}
 	 * </pre>
 	 */
 	private static Map<String, JanelaChat> chats = new HashMap<String, JanelaChat>();
@@ -43,36 +43,62 @@ public class JanelaChat extends JFrame implements ActionListener {
 
 	private JTextArea taLog;
 
-	private JogadorVO jogador;
+	private JPanel panelComandos;
+
+	private JScrollPane paneLog;
+
+	private JogadorVO jogadorRemoto;
+
+	private JPanel principalPane;
+
+	public JanelaChat() {
+		this(null);
+	}
 
 	public JanelaChat(JogadorVO jogador) {
-		this.jogador = jogador;
+		super();
+		this.jogadorRemoto = jogador;
 		chats.put(jogador.getNome(), this);
+		initialize();
+	}
 
-		setTitle("Chat com " + jogador.getNome());
-		setSize(300, 200);
+	private void initialize() {
+		setTitle("Chat com " + jogadorRemoto.getNome());
+		setSize(400, 200);
 
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setContentPane(getPrincipalPane());
+		// setVisible(true);
+	}
 
-		btEnviar = new JButton("Enviar");
-		btEnviar.addActionListener(this);
-		taLog = new JTextArea();
-		taLog.setEditable(false);
-		textMensagem = new JTextField();
-		textMensagem.setPreferredSize(new Dimension(120, 50));
-		getContentPane().add(new JScrollPane(taLog), BorderLayout.CENTER);
-		JPanel panelComandos = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		panelComandos.add(textMensagem);
-		panelComandos.add(btEnviar);
-		getContentPane().add(panelComandos, BorderLayout.SOUTH);
-		setVisible(true);
+	/**
+	 * This method initializes principalPane
+	 * 
+	 * @return javax.swing.JPanel
+	 */
+	private JPanel getPrincipalPane() {
+		if (principalPane == null) {
+			principalPane = new JPanel();
+			principalPane.setLayout(new BorderLayout());
+			principalPane.add(getPanelComandos(), BorderLayout.SOUTH);
+			principalPane.add(getPaneLog(), BorderLayout.CENTER);
+		}
+		return principalPane;
+	}
+
+	public JButton getBtEnviar() {
+		if (btEnviar == null) {
+			btEnviar = new JButton("Enviar");
+			btEnviar.addActionListener(this);
+		}
+		return btEnviar;
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
 		try {
 			ChatMensagemVO msg = new ChatMensagemVO(textMensagem.getText(),
 					JogadoresBusiness.getJogadorLocal().getNome());
-			jogador.getConn().send(msg);
+			jogadorRemoto.getConn().send(msg);
 			textMensagem.setText("");
 			appendMensagem(msg);
 		} catch (IOException e) {
@@ -92,7 +118,40 @@ public class JanelaChat extends JFrame implements ActionListener {
 
 	@Override
 	public void dispose() {
-		chats.remove(jogador.getNome());
+		chats.remove(jogadorRemoto.getNome());
 		super.dispose();
+	}
+
+	public JPanel getPanelComandos() {
+		if (panelComandos == null) {
+			panelComandos = new JPanel(new BorderLayout(3, 3));
+			panelComandos.add(textMensagem);
+			panelComandos.add(btEnviar);
+		}
+		return panelComandos;
+	}
+
+	public JTextArea getTaLog() {
+		if (taLog == null) {
+			taLog = new JTextArea();
+			taLog.setEditable(false);
+		}
+		return taLog;
+	}
+
+	public JTextField getTextMensagem() {
+		if (textMensagem == null) {
+			textMensagem = new JTextField();
+			textMensagem.setPreferredSize(new Dimension(120, 50));
+		}
+		return textMensagem;
+	}
+
+	public JScrollPane getPaneLog() {
+		if (paneLog == null) {
+			paneLog = new JScrollPane();
+			paneLog.setViewportView(taLog);
+		}
+		return paneLog;
 	}
 }
