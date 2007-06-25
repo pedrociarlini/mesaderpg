@@ -20,7 +20,7 @@ import pedrociarlini.mesaderpg.model.ChatMensagemVO;
 import pedrociarlini.mesaderpg.model.JogadorVO;
 import pedrociarlini.mesaderpg.ui.util.MensagensUtil;
 
-public class JanelaChat extends JFrame implements ActionListener {
+public class JanelaChat extends JFrame {
 
 	/**
 	 * 
@@ -39,8 +39,6 @@ public class JanelaChat extends JFrame implements ActionListener {
 
 	private JButton btEnviar;
 
-	private JTextField textMensagem;
-
 	private JTextArea taLog;
 
 	private JPanel panelComandos;
@@ -51,19 +49,25 @@ public class JanelaChat extends JFrame implements ActionListener {
 
 	private JPanel principalPane;
 
+	private JScrollPane scrollPaneMsg = null;
+
+	private JTextArea taMensagem = null;
+
 	public JanelaChat() {
-		this(null);
+		super();
+		initialize();
 	}
 
 	public JanelaChat(JogadorVO jogador) {
 		super();
-		this.jogadorRemoto = jogador;
-		chats.put(jogador.getNome(), this);
 		initialize();
+		this.jogadorRemoto = jogador;
+		setTitle("Chat com " + jogadorRemoto.getNome());
+		chats.put(jogador.getNome(), this);
 	}
 
 	private void initialize() {
-		setTitle("Chat com " + jogadorRemoto.getNome());
+		setTitle("Chat...");
 		setSize(400, 200);
 
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -78,8 +82,10 @@ public class JanelaChat extends JFrame implements ActionListener {
 	 */
 	private JPanel getPrincipalPane() {
 		if (principalPane == null) {
+			BorderLayout borderLayout = new BorderLayout();
+			borderLayout.setHgap(2);
 			principalPane = new JPanel();
-			principalPane.setLayout(new BorderLayout());
+			principalPane.setLayout(borderLayout);
 			principalPane.add(getPanelComandos(), BorderLayout.SOUTH);
 			principalPane.add(getPaneLog(), BorderLayout.CENTER);
 		}
@@ -89,11 +95,12 @@ public class JanelaChat extends JFrame implements ActionListener {
 	public JButton getBtEnviar() {
 		if (btEnviar == null) {
 			btEnviar = new JButton("Enviar");
-			btEnviar.addActionListener(this);
+			// btEnviar.addActionListener(this);
 		}
 		return btEnviar;
 	}
 
+    /*
 	public void actionPerformed(ActionEvent arg0) {
 		try {
 			ChatMensagemVO msg = new ChatMensagemVO(textMensagem.getText(),
@@ -106,6 +113,7 @@ public class JanelaChat extends JFrame implements ActionListener {
 					+ e.getMessage());
 		}
 	}
+	*/
 
 	public static JanelaChat getChat(String jogadorNome) {
 		return chats.get(jogadorNome);
@@ -125,8 +133,9 @@ public class JanelaChat extends JFrame implements ActionListener {
 	public JPanel getPanelComandos() {
 		if (panelComandos == null) {
 			panelComandos = new JPanel(new BorderLayout(3, 3));
-			panelComandos.add(textMensagem);
-			panelComandos.add(btEnviar);
+			panelComandos.setPreferredSize(new Dimension(75, 50));
+			panelComandos.add(getBtEnviar(), BorderLayout.EAST);
+			panelComandos.add(getScrollPaneMsg(), BorderLayout.CENTER);
 		}
 		return panelComandos;
 	}
@@ -139,19 +148,37 @@ public class JanelaChat extends JFrame implements ActionListener {
 		return taLog;
 	}
 
-	public JTextField getTextMensagem() {
-		if (textMensagem == null) {
-			textMensagem = new JTextField();
-			textMensagem.setPreferredSize(new Dimension(120, 50));
-		}
-		return textMensagem;
-	}
-
 	public JScrollPane getPaneLog() {
 		if (paneLog == null) {
 			paneLog = new JScrollPane();
-			paneLog.setViewportView(taLog);
+			paneLog.setViewportView(getTaLog());
 		}
 		return paneLog;
+	}
+
+	/**
+	 * This method initializes scrollPaneMsg	
+	 * 	
+	 * @return javax.swing.JScrollPane	
+	 */
+	private JScrollPane getScrollPaneMsg() {
+		if (scrollPaneMsg == null) {
+			scrollPaneMsg = new JScrollPane();
+			scrollPaneMsg.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			scrollPaneMsg.setViewportView(getTaMensagem());
+		}
+		return scrollPaneMsg;
+	}
+
+	/**
+	 * This method initializes taMensagem	
+	 * 	
+	 * @return javax.swing.JTextArea	
+	 */
+	private JTextArea getTaMensagem() {
+		if (taMensagem == null) {
+			taMensagem = new JTextArea();
+		}
+		return taMensagem;
 	}
 }
