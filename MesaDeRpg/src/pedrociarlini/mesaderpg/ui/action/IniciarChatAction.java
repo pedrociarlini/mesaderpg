@@ -62,9 +62,10 @@ public class IniciarChatAction extends AbstractAction {
 		String nome = jogador.getNome();
 		JanelaChat chat = JanelaChat.getChat(nome);
 		if (chat != null) {
+			chat.setVisible(true);
 			chat.requestFocusInWindow();
 		} else {
-			new JanelaChat(JogadoresBusiness.getJogador(nome));
+			new JanelaChat(JogadoresBusiness.getJogador(nome)).setVisible(true);
 		}
 	}
 }
