@@ -128,6 +128,7 @@ public class ConexaoTrabalho extends AbstractConexao {
 			while (!ConexaoTrabalho.this.isClosed() && !errorOcurred) {
 				m = this.conn.createBlankMessage();
 				try {
+					// TODO Tratar desconexão do usuário remoto. (remover da lista)
 					this.conn.receive(m);
 					data = (Serializable) SerializationUtils.deserialize(m
 							.getBytes());
