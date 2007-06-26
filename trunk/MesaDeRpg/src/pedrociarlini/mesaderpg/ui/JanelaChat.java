@@ -2,9 +2,6 @@ package pedrociarlini.mesaderpg.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,12 +10,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
-import pedrociarlini.mesaderpg.business.JogadoresBusiness;
 import pedrociarlini.mesaderpg.model.ChatMensagemVO;
 import pedrociarlini.mesaderpg.model.JogadorVO;
-import pedrociarlini.mesaderpg.ui.util.MensagensUtil;
 
 public class JanelaChat extends JFrame {
 
