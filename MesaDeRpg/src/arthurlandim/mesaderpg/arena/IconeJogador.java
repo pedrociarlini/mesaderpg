@@ -10,29 +10,31 @@ import javax.swing.ImageIcon;
 
 /**
  * @author Familia
- *
+ * 
  */
 public class IconeJogador extends ImageIcon {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7161521094067925577L;
-	private int x,y = 10;
+
+	private int x, y = 10;
+
 	private String nome;
+
 	private Rectangle2D imagemRect;
 
 	public IconeJogador() {
 	}
-	
+
 	public IconeJogador(BufferedImage img, int x, int y, String nome) {
 		super(img);
 		this.x = x;
 		this.y = y;
-		this.nome=nome;
-		imagemRect = new Rectangle2D.Double(x, y,
-				getIconWidth(), getIconHeight());
-
+		this.nome = nome;
+		imagemRect = new Rectangle2D.Double(x, y, getIconWidth(),
+				getIconHeight());
 	}
 
 	/**
@@ -43,16 +45,17 @@ public class IconeJogador extends ImageIcon {
 	}
 
 	/**
-	 * @param nome the nome to set
+	 * @param nome
+	 *            the nome to set
 	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		// TODO Auto-generated method stub
-		return this.nome.equals(((IconeJogador)obj).getNome());
+		return this.nome.equals(((IconeJogador) obj).getNome());
 	}
 
 	/**
@@ -63,7 +66,8 @@ public class IconeJogador extends ImageIcon {
 	}
 
 	/**
-	 * @param imagemRect the imagemRect to set
+	 * @param imagemRect
+	 *            the imagemRect to set
 	 */
 	public void setImagemRect(Rectangle2D imagemRect) {
 		this.imagemRect = imagemRect;
@@ -77,12 +81,13 @@ public class IconeJogador extends ImageIcon {
 	}
 
 	/**
-	 * @param x the x to set
+	 * @param x
+	 *            the x to set
 	 */
 	public void setX(int x) {
 		this.x = x;
-		imagemRect = new Rectangle2D.Double(x, y,
-				getIconWidth(), getIconHeight());
+		imagemRect = new Rectangle2D.Double(x, y, getIconWidth(),
+				getIconHeight());
 	}
 
 	/**
@@ -93,18 +98,19 @@ public class IconeJogador extends ImageIcon {
 	}
 
 	/**
-	 * @param y the y to set
+	 * @param y
+	 *            the y to set
 	 */
 	public void setY(int y) {
 		this.y = y;
-		imagemRect = new Rectangle2D.Double(x, y,
-				getIconWidth(), getIconHeight());
+		imagemRect = new Rectangle2D.Double(x, y, getIconWidth(),
+				getIconHeight());
 	}
-	
+
 	public void mudarPosicao(int x, int y) {
 		this.x = x;
 		this.y = y;
-		imagemRect = new Rectangle2D.Double(x, y,
-				getIconWidth(), getIconHeight());
+		imagemRect = new Rectangle2D.Double(x, y, getIconWidth(),
+				getIconHeight());
 	}
 }
