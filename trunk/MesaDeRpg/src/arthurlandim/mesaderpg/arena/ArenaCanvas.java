@@ -34,6 +34,8 @@ class ArenaCanvas extends JPanel implements ArenaInterface {
 
 	private JLabel label;
 
+	private boolean ligandoJogadores;
+
 	public ArenaCanvas() {
 		setBackground(Color.white);
 		addMouseListener(new MyMouseListener());
@@ -159,10 +161,13 @@ class ArenaCanvas extends JPanel implements ArenaInterface {
 		}
 
 		public void mouseClicked(MouseEvent e) {
-			selectedShape = getImageUnderPosition(e.getX(), e.getY());
-			if (selectedShape != null) {
-				// TODO fazer o icone parecer marcado
-				repaint();
+			if (ligandoJogadores) {
+			} else {
+				selectedShape = getImageUnderPosition(e.getX(), e.getY());
+				if (selectedShape != null) {
+					// TODO fazer o icone parecer marcado
+					repaint();
+				}
 			}
 		}
 	}
@@ -204,5 +209,9 @@ class ArenaCanvas extends JPanel implements ArenaInterface {
 
 	public void setLabel(JLabel label) {
 		this.label = label;
+	}
+
+	public void setLigandoJogadores(boolean b) {
+		ligandoJogadores = b;
 	}
 }
