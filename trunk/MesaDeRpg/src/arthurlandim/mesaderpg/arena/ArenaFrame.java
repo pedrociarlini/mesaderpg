@@ -32,7 +32,7 @@ public class ArenaFrame extends JFrame implements ArenaInterface {
 		super();
 		initialize();
 	}
-	
+
 	private void initialize() {
 		this.setContentPane(getPrincipalPane());
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -40,7 +40,7 @@ public class ArenaFrame extends JFrame implements ArenaInterface {
 		setSize(640, 480);
 		setVisible(true);
 	}
-	
+
 	/**
 	 * This method initializes principalPane
 	 * 
@@ -58,14 +58,16 @@ public class ArenaFrame extends JFrame implements ArenaInterface {
 		}
 		return principalPane;
 	}
-	
+
 	private JPanel getPanelComandos() {
 		if (panelComandos == null) {
 			panelComandos = new JPanel();
 			panelComandos.setLayout(new GridLayout(1, 3));
 			panelComandos.add(getTextNome());
 			panelComandos.add(getBtInserir());
-			panelComandos.add(new JLabel("x,y: ", JLabel.RIGHT));
+			JLabel label = new JLabel("x,y: ", JLabel.RIGHT);
+			panelComandos.add(label);
+			getCanvas().setLabel(label);
 		}
 		return panelComandos;
 	}
@@ -80,7 +82,7 @@ public class ArenaFrame extends JFrame implements ArenaInterface {
 
 	public void removerJogador(JogadorVO jogador) {
 		canvas.removerJogador(jogador);
-		
+
 	}
 
 	public JButton getBtInserir() {
@@ -89,7 +91,8 @@ public class ArenaFrame extends JFrame implements ArenaInterface {
 			btInserir.setText("Inserir Jogador");
 			btInserir.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					adicionarJogador(new JogadorVO(getTextNome().getText(), false));
+					adicionarJogador(new JogadorVO(getTextNome().getText(),
+							false));
 					getTextNome().setText(getTextNome().getText() + " 2");
 				}
 			});
@@ -105,7 +108,7 @@ public class ArenaFrame extends JFrame implements ArenaInterface {
 	}
 
 	public ArenaCanvas getCanvas() {
-		if(canvas == null) {
+		if (canvas == null) {
 			canvas = new ArenaCanvas();
 		}
 		return canvas;
