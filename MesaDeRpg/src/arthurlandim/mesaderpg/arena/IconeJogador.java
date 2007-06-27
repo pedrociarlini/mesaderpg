@@ -3,6 +3,7 @@
  */
 package arthurlandim.mesaderpg.arena;
 
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
@@ -20,6 +21,8 @@ public class IconeJogador extends ImageIcon {
 	private static final long serialVersionUID = -7161521094067925577L;
 
 	private int x, y = 10;
+    
+    private Point2D point2D;
 
 	private String nome;
 
@@ -86,6 +89,7 @@ public class IconeJogador extends ImageIcon {
 	 */
 	public void setX(int x) {
 		this.x = x;
+        point2D.setLocation(x, point2D.getY());
 		imagemRect = new Rectangle2D.Double(x, y, getIconWidth(),
 				getIconHeight());
 	}
@@ -103,6 +107,7 @@ public class IconeJogador extends ImageIcon {
 	 */
 	public void setY(int y) {
 		this.y = y;
+        point2D.setLocation(point2D.getX(), y);
 		imagemRect = new Rectangle2D.Double(x, y, getIconWidth(),
 				getIconHeight());
 	}
@@ -110,7 +115,16 @@ public class IconeJogador extends ImageIcon {
 	public void mudarPosicao(int x, int y) {
 		this.x = x;
 		this.y = y;
-		imagemRect = new Rectangle2D.Double(x, y, getIconWidth(),
-				getIconHeight());
+		imagemRect.setRect(x, y, getIconWidth(), getIconHeight());
 	}
+
+    
+    public Point2D getPoint2D() {
+        return point2D;
+    }
+
+    
+    public void setPoint2D(Point2D point2D) {
+        this.point2D = point2D;
+    }
 }
