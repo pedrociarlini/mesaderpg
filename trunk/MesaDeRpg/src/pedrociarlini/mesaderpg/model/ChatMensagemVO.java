@@ -4,7 +4,12 @@ import java.io.Serializable;
 
 public class ChatMensagemVO implements Serializable {
 
-	private String mensagem;
+	/**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
+    private String mensagem;
 
 	private String jogadorNome;
 
