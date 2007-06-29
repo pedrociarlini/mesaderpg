@@ -112,7 +112,7 @@ public class IconeJogador extends ImageIcon {
 				getIconHeight());
 	}
 
-	public void mudarPosicao(int x, int y) {
+	public void setPosicao(int x, int y) {
 		this.x = x;
 		this.y = y;
 		imagemRect.setRect(x, y, getIconWidth(), getIconHeight());
