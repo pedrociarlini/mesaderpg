@@ -9,8 +9,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
@@ -27,7 +28,7 @@ class ArenaCanvas extends JPanel implements ArenaInterface {
 
     int x1, y1, x2, y2;
 
-    List<IconeJogador> jogadores = new ArrayList<IconeJogador>();
+    Map<String, IconeJogador> jogadores;
 
     IconeJogador selectedShape;
 
@@ -39,9 +40,11 @@ class ArenaCanvas extends JPanel implements ArenaInterface {
 
     private IconeJogador jogador1;
 
-    private List<Linha> linhas = new ArrayList<Linha>();
+    private List<Linha> linhas;
 
     public ArenaCanvas() {
+    	jogadores = Collections.synchronizedMap(jogadores);
+    	linhas = Collections.synchronizedList(linhas);
         setBackground(Color.white);
         addMouseListener(new MyMouseListener());
         addMouseMotionListener(new MyMouseMotionListener());
@@ -53,14 +56,14 @@ class ArenaCanvas extends JPanel implements ArenaInterface {
      * @see arthurlandim.mesaderpg.arena.ArenaInterface#adicionarJogador(pedrociarlini.mesaderpg.model.JogadorVO)
      */
     public void adicionarJogador(JogadorVO jogador) {
-        IconeJogador joga = null;
+        IconeJogador iconJogador = null;
         try {
-            joga = new IconeJogador(ImageIO.read(new File(
+            iconJogador = new IconeJogador(ImageIO.read(new File(
                     "imagens\\jogador.jpg")), 10, 10, jogador.getNome());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        jogadores.add(joga);
+        jogadores.put(iconJogador.getNome(), iconJogador);
         repaint();
     }
 
@@ -70,17 +73,7 @@ class ArenaCanvas extends JPanel implements ArenaInterface {
      * @see arthurlandim.mesaderpg.arena.ArenaInterface#removerJogador(pedrociarlini.mesaderpg.model.JogadorVO)
      */
     public void removerJogador(JogadorVO jogador) {
-
-        IconeJogador joga = null;
-        try {
-            joga = new IconeJogador(ImageIO.read(new File(
-                    "imagens\\jogador.jpg")), 10, 10, jogador.getNome());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        jogadores.remove(jogadores.indexOf(joga));
-
+        jogadores.remove(jogador.getNome());
     }
 
     public void paint(Graphics g) {
@@ -89,7 +82,7 @@ class ArenaCanvas extends JPanel implements ArenaInterface {
         g.clearRect(0, 0, getWidth(), getHeight());
 
         Graphics2D g2D = (Graphics2D) g;
-        for (IconeJogador jogador : jogadores) {
+        for (IconeJogador jogador : jogadores.values()) {
             g2D.drawImage(jogador.getImage(), jogador.getX(), jogador.getY(),
                     this);
             g2D.drawString(jogador.getNome(), jogador.getX(), jogador.getY()
@@ -110,7 +103,7 @@ class ArenaCanvas extends JPanel implements ArenaInterface {
 
     private IconeJogador getImageUnderPosition(int x, int y) {
         if (jogadores != null) {
-            for (IconeJogador imagemRectangle : jogadores) {
+            for (IconeJogador imagemRectangle : jogadores.values()) {
                 if (imagemRectangle != null
                         && imagemRectangle.getImagemRect().contains(x, y)) { return imagemRectangle; }
             }
@@ -178,7 +171,7 @@ class ArenaCanvas extends JPanel implements ArenaInterface {
                 // boundingRec = null;
                 x2 = e.getX();
                 y2 = e.getY();
-                selectedShape.mudarPosicao(selectedShape.getX() + x2 - x1,
+                selectedShape.setPosicao(selectedShape.getX() + x2 - x1,
                         selectedShape.getY() + y2 - y1);
                 x1 = x2;
                 y1 = y2;
