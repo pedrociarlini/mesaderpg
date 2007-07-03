@@ -9,7 +9,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +45,9 @@ class ArenaCanvas extends JPanel implements ArenaInterface {
     private List<Linha> linhas;
 
     public ArenaCanvas() {
+    	jogadores = new HashMap<String, IconeJogador>();
     	jogadores = Collections.synchronizedMap(jogadores);
+    	linhas = new ArrayList<Linha>();
     	linhas = Collections.synchronizedList(linhas);
         setBackground(Color.white);
         addMouseListener(new MyMouseListener());
