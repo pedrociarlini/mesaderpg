@@ -71,4 +71,10 @@ public class JogadorVO implements Serializable {
     
         return retValue;
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+    	return obj.getClass().equals(this.getClass())
+				&& ((JogadorVO) obj).getNome().equalsIgnoreCase(this.getNome());
+    }
 }

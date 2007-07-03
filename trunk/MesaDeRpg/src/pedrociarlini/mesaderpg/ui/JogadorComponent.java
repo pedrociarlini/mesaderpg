@@ -53,6 +53,12 @@ public class JogadorComponent extends JLabel {
     }
     
     public String toString() {
-		return jogador.getNome();
+		return "Componente do Jogador: " + jogador.getNome();
+	}
+    
+    @Override
+	public boolean equals(Object obj) {
+		return obj.getClass().equals(this.getClass())
+				&& ((JogadorComponent) obj).jogador.equals(jogador);
 	}
 }
