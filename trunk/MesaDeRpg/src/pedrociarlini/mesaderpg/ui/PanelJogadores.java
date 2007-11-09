@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.BevelBorder;
 
-import pedrociarlini.mesaderpg.model.JogadorVO;
 import pedrociarlini.mesaderpg.ui.action.IniciarChatAction;
 import pedrociarlini.mesaderpg.ui.action.RolarDadosAction;
 import pedrociarlini.mesaderpg.util.MessagesUtil;
