@@ -1,0 +1,11 @@
+#summary One-sentence summary of this page.
+
+= Features =
+
+=== Rolador de dados ===
+
+ * Um jogador deve poder efetuar um _lance de dados_ (ou jogada de dados)
+ * Os jogadores devem poder ver o resultado da jogada de dados
+ * O jogador que lançar os dados deve poder escolher quais jogadores (incluindo o mestre) verão essa jogada
+
+=== Arena ===
